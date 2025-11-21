@@ -1,0 +1,96 @@
+@model ProximasCarrerasViewModel
+
+@{
+    ViewData["Title"] = "Próximas Carreras";
+}
+
+<h1 class="text-center mb-4 fw-bold">
+    🏃‍♂️ Próximas Carreras Confirmadas
+</h1>
+
+<div class="container">
+
+    <!-- ============================
+         ZARAGOZA / ARAGÓN
+         ============================ -->
+    <h2 class="fw-bold mt-4 mb-3">🏙️ Zaragoza / Aragón</h2>
+
+    <div class="row">
+        @foreach (var c in Model.CarrerasAragon.OrderBy(x => x.Fecha))
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card carrera-card shadow-sm border-0">
+
+                    <img src="@c.ImagenUrl" class="card-img-top carrera-img" alt="@c.Nombre" />
+
+                    <div class="card-body">
+
+                        <h5 class="card-title fw-bold mb-2">@c.Nombre</h5>
+
+                        <p class="text-muted mb-1">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            @c.Fecha.ToString("dd/MM/yyyy")
+                        </p>
+
+                        <p class="text-muted mb-1">
+                            <i class="fa-solid fa-location-dot"></i>
+                            @c.Ciudad (@c.Comunidad)
+                        </p>
+
+                        @if (!string.IsNullOrEmpty(c.Hora))
+                        {
+                            <p class="text-muted mb-1">
+                                <i class="fa-solid fa-clock"></i> @c.Hora
+                            </p>
+                        }
+
+                        <span class="badge distancia-badge">
+                            <i class="fa-solid fa-road"></i> @c.DistanciaKm km
+                        </span>
+
+                        <p class="card-text mt-3 descripcion">@c.Descripcion</p>
+
+                        <a href="@c.Enlace" target="_blank"
+                           class="btn btn-primary w-100 fw-bold mt-3">
+                            Más información
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- ============================
+         GRANDES CARRERAS ESPAÑA
+         ============================ -->
+
+    <h2 class="mt-5 mb-3 text-center fw-bold">🇪🇸 Carreras más importantes de España</h2>
+
+    <div class="container listado-espana">
+        <ul class="list-group">
+            @foreach (var c in Model.CarrerasEspana.OrderBy(x => x.Fecha))
+            {
+                <li class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-start">
+                    
+                    <div>
+                        <strong>@c.Nombre</strong><br />
+                        <span class="text-muted">
+                            📅 @c.Fecha.ToString("dd/MM/yyyy") · 
+                            📍 @c.Ciudad (@c.Comunidad) · 
+                            📏 @c.DistanciaKm km
+                        </span>
+                    </div>
+
+                    <div class="mt-2 mt-md-0">
+                        <a href="@c.Enlace" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Ver más
+                        </a>
+                    </div>
+
+                </li>
+            }
+        </ul>
+    </div>
+
+</div>

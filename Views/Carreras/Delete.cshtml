@@ -1,0 +1,35 @@
+@model R4G.App.Models.Carrera
+
+<div class="card p-4 shadow-sm">
+
+    <h2>¿Seguro que quieres eliminar esta carrera?</h2>
+
+    <p><strong>Nombre:</strong> @Model.Nombre</p>
+    <p><strong>Fecha:</strong> @Model.Fecha.ToString("dd/MM/yyyy")</p>
+    <p><strong>Ciudad:</strong> @Model.Ciudad</p>
+    <p><strong>Distancia:</strong> @Model.DistanciaKm km</p>
+
+    <hr />
+
+    <h4>Tiempo registrado</h4>
+    <p>
+        @Model.TiempoHoras h 
+        @Model.TiempoMinutos m 
+        @Model.TiempoSegundos s
+    </p>
+
+    <hr />
+
+    @if (!string.IsNullOrWhiteSpace(Model.Comentarios))
+    {
+        <p><strong>Comentarios:</strong> @Model.Comentarios</p>
+    }
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</div>

@@ -1,0 +1,132 @@
+﻿@model R4G.App.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<!-- HERO PANORÁMICO -->
+<section class="hero-section mb-5">
+</section>
+
+<div class="container">
+
+    <!-- ESTADÍSTICAS PRINCIPALES -->
+    <section class="home-section white">
+        <h2 class="section-title">Tus estadísticas</h2>
+
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <h3>@Model.DistanciaTotal km</h3>
+                    <p>Total recorridos</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <h3>@Model.TiempoTotal.ToString(@"hh\:mm\:ss")</h3>
+                    <p>Tiempo total</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <h3>@Model.RitmoMedioGlobal</h3>
+                    <p>Ritmo medio</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ÚLTIMO ENTRENAMIENTO -->
+    <section class="home-section gray">
+        <h2 class="section-title">Tu último entrenamiento</h2>
+
+        @if (Model.UltimoEntrenamiento != null)
+        {
+            <div class="card p-4 mx-auto" style="max-width: 650px;">
+                <h4>@Model.UltimoEntrenamiento.Fecha.ToString("dd MMMM yyyy")</h4>
+                <p><strong>Distancia:</strong> @Model.UltimoEntrenamiento.DistanciaKm km</p>
+                <p><strong>Ritmo:</strong> @Model.UltimoEntrenamiento.RitmoMedio</p>
+                <p><strong>Duración:</strong> @Model.UltimoEntrenamiento.Duracion.ToString(@"hh\:mm\:ss")</p>
+                <p><strong>Velocidad media:</strong> @Model.UltimoEntrenamiento.VelocidadMedia.ToString("0.0") km/h</p>
+            </div>
+        }
+        else
+        {
+            <p class="text-center text-muted">Aún no tienes entrenamientos registrados.</p>
+        }
+    </section>
+
+    <!-- MEJORES MARCAS -->
+    <section class="home-section white">
+        <h2 class="section-title">Tus mejores marcas</h2>
+
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <h3>@Model.Mejor5K</h3>
+                    <p>Mejor 5K</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <h3>@Model.Mejor10K</h3>
+                    <p>Mejor 10K</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <h3>@Model.MejorMedia</h3>
+                    <p>Mejor Media Maratón</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GRÁFICO MENSUAL -->
+    <section class="home-section gray">
+        <h2 class="section-title">Kilómetros por mes</h2>
+
+        <canvas id="kmsChart" width="400" height="200"></canvas>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+            const kmsData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.KmsPorMes));
+
+            const ctx = document.getElementById('kmsChart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(kmsData),
+                    datasets: [{
+                        label: 'Km recorridos',
+                        data: Object.values(kmsData),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        </script>
+
+    </section>
+
+    <!-- FRASE MOTIVACIONAL -->
+    <section class="motivacion">
+        <h2>"Corro porque caminar me cansa"</h2>
+        <p>Sergio Turull (Pitufollow)</p>
+    </section>
+
+</div>

@@ -1,0 +1,36 @@
+@model R4G.App.Models.Entrenamiento
+
+@{
+    ViewData["Title"] = "Detalles del Entrenamiento";
+}
+
+<h1 class="mb-4">👁️ Detalles del Entrenamiento</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow-sm p-4 r4g-form-card">
+
+            <h4 class="fw-bold mb-3">@Model.Tipo</h4>
+
+            <p><strong>Fecha:</strong> @Model.Fecha.ToString("dd/MM/yyyy")</p>
+            <p><strong>Distancia:</strong> @Model.DistanciaKm km</p>
+            <p><strong>Duración:</strong> @($"{Model.DuracionHoras:D2}:{Model.DuracionMinutos:D2}:{Model.DuracionSegundos:D2}")</p>
+            <p><strong>Ritmo medio:</strong> @Model.RitmoMedio</p>
+            @if (!string.IsNullOrWhiteSpace(Model.Comentarios))
+            {
+                <p class="text-muted mt-3"><em>"@Model.Comentarios"</em></p>
+            }
+
+            <hr />
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">⬅ Volver</a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">✏️ Editar</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

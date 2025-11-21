@@ -1,0 +1,276 @@
+/* =====================================================
+   ✦ R4G • ESTILOS GLOBALES (Optimizado y Profesional)
+===================================================== */
+
+/* ================================
+   BASE
+================================ */
+html {
+    font-size: 16px;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    background: #f7f9fc;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #222;
+}
+
+/* ================================
+   NAVBAR — SOLO PARA PÁGINAS NORMALES
+================================ */
+.r4g-navbar {
+    padding: 14px 0;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar-logo {
+    height: 70px;
+    width: auto;
+}
+
+/* Enlaces */
+.nav-center-gap .nav-link {
+    margin: 0 18px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #444 !important;
+}
+
+.nav-center-gap .nav-link:hover {
+    color: #0d6efd !important;
+}
+
+.navbar-nav.ms-auto .nav-link {
+    font-size: 1.05rem;
+}
+
+.btn-outline-danger {
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* ================================
+   OCULTAR NAVBAR EN WELCOME & LOGGEDOUT
+================================ */
+body.welcome-page header,
+body.welcome-page nav,
+body.loggedout-page header,
+body.loggedout-page nav {
+    display: none !important;
+}
+
+/* ================================
+   TARJETAS (GLOBAL)
+================================ */
+.card,
+.stat-box,
+.entrenamiento-card,
+.carrera-card {
+    border-radius: 14px;
+    border: none;
+    background: #ffffff;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover,
+.stat-box:hover,
+.entrenamiento-card:hover,
+.carrera-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.15);
+}
+
+/* ================================
+   FORMULARIOS
+================================ */
+.r4g-form-card {
+    border-radius: 14px;
+    background: #ffffff;
+    padding: 20px;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    padding: .55rem .75rem;
+}
+
+/* ================================
+   BOTONES
+================================ */
+.btn {
+    padding: .55rem 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.btn-xl {
+    font-size: 1.15rem;
+    padding: 0.9rem 2.3rem;
+}
+
+/* ================================
+   PROXIMAS CARRERAS
+================================ */
+.carrera-img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f1f3f5;
+    padding: .5rem;
+    border-radius: 12px;
+}
+
+.distancia-mini {
+    background: #0d6efd;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+}
+
+/* ================================
+   HERO HOME
+================================ */
+.hero-section {
+    width: 100%;
+    height: 28vh;
+    background: url("../img/RFG_BANNER.png") center/cover no-repeat;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.42);
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-subtitle {
+    font-size: 1.35rem;
+    opacity: 0.92;
+}
+
+/* ================================
+   HOME — SECCIONES
+================================ */
+.home-section {
+    width: 100%;
+    padding: 80px 0;
+}
+
+.home-section.white { background: #ffffff; }
+.home-section.gray  { background: #f1f3f5; }
+
+.section-title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+/* ================================
+   ESTADÍSTICAS HOME
+================================ */
+.stat-box {
+    padding: 32px;
+    text-align: center;
+    border-radius: 16px;
+}
+
+.stat-box h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* ================================
+   MOTIVACIÓN
+================================ */
+.motivacion {
+    background: linear-gradient(135deg, #ff7a18, #af002d 85%);
+    padding: 90px 0;
+    color: #fff;
+    text-align: center;
+    border-radius: 16px;
+    margin-top: 60px;
+}
+
+.motivacion h2 {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.motivacion p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+/* ================================
+   LANDING PAGE (WELCOME)
+================================ */
+.landing-container {
+    height: 100vh;
+    width: 100%;
+    background: url('/img/r4g2.png') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.landing-content {
+    position: relative;
+    top: 140px;
+}
+
+.landing-title {
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.65);
+    margin-bottom: 25px;
+}
+
+.landing-subtitle {
+    font-size: 1.3rem;
+    max-width: 900px;
+    margin: 0 auto 35px auto;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.65);
+}
+
+.landing-buttons a {
+    margin: 0 12px;
+    padding: 14px 30px;
+    font-size: 1.3rem;
+}
+
+/* ================================
+   LOGGED OUT — FULLSCREEN PHOTO
+================================ */
+.loggedout-page {
+    background: url('/img/wp4405374-eliud-kipchoge-wallpapers.jpg') center/cover no-repeat fixed;
+    min-height: 100vh;
+}
+
+.loggedout-overlay {
+    min-height: 100vh;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px;
+    color: white;
+}

@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin/Release/net8.0/publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/8bbd0af2-8460-49ee-8f28-19a926038399/resourceGroups/r4g-rg/providers/Microsoft.Web/sites/runforglory"
+}

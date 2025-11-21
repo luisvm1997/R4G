@@ -1,0 +1,22 @@
+@page
+@model R4G.App.Areas.Identity.Pages.Account.LoggedOutModel
+@{
+    ViewData["Title"] = "Hasta pronto runner";
+    ViewData["BodyClass"] = "loggedout-page";   <!-- IMPORTANTE -->
+}
+
+<div class="loggedout-overlay d-flex flex-column justify-content-center align-items-center text-center">
+
+    <h1 class="text-white mb-3 fw-bold" style="font-size: 3rem;">
+        ¡Nos vemos pronto, runner! 🏃🔥
+    </h1>
+
+    <p class="text-white mb-4" style="font-size: 1.3rem;">
+        Sigue acumulando kilómetros. Recarga energía y vuelve cuando quieras.
+    </p>
+
+    <a href="/Identity/Account/Login" class="btn btn-primary btn-lg px-4 py-2">
+        Volver a iniciar sesión
+    </a>
+
+</div>

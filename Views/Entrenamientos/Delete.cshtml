@@ -1,0 +1,36 @@
+@model R4G.App.Models.Entrenamiento
+
+@{
+    ViewData["Title"] = "Eliminar Entrenamiento";
+}
+
+<h1 class="mb-4 text-danger">🗑️ Eliminar Entrenamiento</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow-sm p-4 r4g-form-card">
+
+            <p><strong>Fecha:</strong> @Model.Fecha.ToString("dd/MM/yyyy")</p>
+            <p><strong>Distancia:</strong> @Model.DistanciaKm km</p>
+            <p><strong>Duración:</strong> @($"{Model.DuracionHoras:D2}:{Model.DuracionMinutos:D2}:{Model.DuracionSegundos:D2}")</p>
+            <p><strong>Tipo:</strong> @Model.Tipo</p>
+
+            <hr />
+
+            <p class="text-danger fw-bold">¿Seguro que quieres eliminar este entrenamiento?</p>
+
+            <form asp-action="DeleteConfirmed">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="d-flex justify-content-between mt-3">
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+

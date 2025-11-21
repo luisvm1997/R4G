@@ -1,0 +1,82 @@
+@model R4G.App.Models.Carrera
+
+@{
+    ViewData["Title"] = "Editar Carrera";
+}
+
+<h1 class="mb-4">✏️ Editar Carrera</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card p-4 shadow-sm r4g-form-card">
+            <div class="card-body">
+
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Nombre de la Carrera</label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Fecha</label>
+                        <input asp-for="Fecha" type="date" class="form-control" />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ciudad</label>
+                        <input asp-for="Ciudad" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Distancia (km)</label>
+                        <input asp-for="DistanciaKm" class="form-control" />
+                        <span asp-validation-for="DistanciaKm" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tiempo (HH:MM:SS)</label>
+                        <div class="d-flex gap-2">
+                            <input asp-for="TiempoHoras" class="form-control" placeholder="HH" />
+                            <input asp-for="TiempoMinutos" class="form-control" placeholder="MM" />
+                            <input asp-for="TiempoSegundos" class="form-control" placeholder="SS" />
+                        </div>
+                        <span asp-validation-for="TiempoHoras" class="text-danger"></span>
+                        <span asp-validation-for="TiempoMinutos" class="text-danger"></span>
+                        <span asp-validation-for="TiempoSegundos" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Posición General</label>
+                        <input asp-for="PosicionGeneral" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Posición Categoría</label>
+                        <input asp-for="PosicionCategoria" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Comentarios</label>
+                        <textarea asp-for="Comentarios" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-action="Index" class="btn btn-secondary">⬅ Volver</a>
+                        <button type="submit" class="btn btn-warning">💾 Guardar Cambios</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - R4G.App</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body class='@ViewData["BodyClass"]'>
+
+    @* Si NO es welcome-page → muestra NAVBAR *@
+    @if (ViewData["BodyClass"]?.ToString() != "welcome-page")
+    {
+        <header>
+            <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm r4g-navbar">
+                <div class="container d-flex align-items-center">
+
+                    <!-- LOGO -->
+                    <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
+                        <img src="/img/logo-r4g.png" alt="R4G" class="navbar-logo">
+                    </a>
+
+                    <!-- BOTÓN MÓVIL -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarR4G">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- MENÚ -->
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarR4G">
+
+                        <!-- LINKS CENTRALES -->
+                        <ul class="navbar-nav mx-auto nav-center-gap">
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Entrenamientos" asp-action="Index">Entrenamientos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Carreras" asp-action="Index">Carreras</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="MejoresMarcas" asp-action="Index">Mejores Marcas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="ProximasCarreras" asp-action="Index">Próximas Carreras</a>
+                            </li>
+
+                        </ul>
+
+                        <!-- LOGIN / LOGOUT -->
+                        <ul class="navbar-nav ms-auto">
+
+                            @if (User.Identity?.IsAuthenticated ?? false)
+                            {
+                                <li class="nav-item d-flex align-items-center me-2">
+                                    <a class="nav-link text-primary fw-bold"
+                                       asp-area="Identity"
+                                       asp-page="/Account/Manage/Index">
+                                        Hola @User.Identity.Name
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                        <button class="btn btn-outline-danger">Logout</button>
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-primary"
+                                       asp-area="Identity"
+                                       asp-page="/Account/Login">
+                                        Login
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+    }
+
+    <!-- MAIN -->
+    <div class="container-fluid p-0">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

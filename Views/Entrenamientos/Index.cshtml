@@ -1,0 +1,61 @@
+@model IEnumerable<R4G.App.Models.Entrenamiento>
+
+@{
+    ViewData["Title"] = "Entrenamientos";
+}
+
+<h1 class="mb-4">🏃 Entrenamientos</h1>
+
+<a class="btn btn-success mb-4" asp-action="Create">
+    ➕ Añadir Entrenamiento
+</a>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+@foreach (var e in Model)
+{
+    <div class="col">
+        <div class="card shadow-sm entrenamiento-card">
+
+            <div class="card-body">
+
+                <h4 class="fw-bold">
+                    @e.Tipo
+                </h4>
+
+                <p class="text-muted mb-2">
+                    📅 @e.Fecha.ToString("dd/MM/yyyy")
+                </p>
+
+                <p class="mb-1">
+                    <strong>Distancia:</strong> @e.DistanciaKm km
+                </p>
+
+                <p class="mb-1">
+                    <strong>Duración:</strong>
+                    @($"{e.DuracionHoras:D2}:{e.DuracionMinutos:D2}:{e.DuracionSegundos:D2}")
+                </p>
+
+                <!-- ⭐ NUEVO: RITMO MEDIO -->
+                <p class="mb-1">
+                    <strong>Ritmo medio:</strong> @e.RitmoMedio
+                </p>
+
+                @if (!string.IsNullOrWhiteSpace(e.Comentarios))
+                {
+                    <p class="mt-2 text-muted"><em>"@e.Comentarios"</em></p>
+                }
+
+                <hr />
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Details" asp-route-id="@e.Id" class="btn btn-info btn-sm text-white">Detalles</a>
+                    <a asp-action="Edit" asp-route-id="@e.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@e.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+</div>

@@ -1,0 +1,72 @@
+@model R4G.App.Models.Entrenamiento
+
+@{
+    ViewData["Title"] = "Añadir Entrenamiento";
+}
+
+<h1 class="mb-4">➕ Añadir Entrenamiento</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow-sm p-4 r4g-form-card">
+            <div class="card-body">
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Fecha</label>
+                        <input asp-for="Fecha" class="form-control" type="date" />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Distancia (km)</label>
+                        <input asp-for="DistanciaKm" class="form-control" />
+                        <span asp-validation-for="DistanciaKm" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Duración (HH:MM:SS)</label>
+                        <div class="d-flex gap-2">
+                            <input asp-for="DuracionHoras" class="form-control" placeholder="HH" />
+                            <input asp-for="DuracionMinutos" class="form-control" placeholder="MM" />
+                            <input asp-for="DuracionSegundos" class="form-control" placeholder="SS" />
+                        </div>
+                        <span asp-validation-for="DuracionHoras" class="text-danger"></span>
+                        <span asp-validation-for="DuracionMinutos" class="text-danger"></span>
+                        <span asp-validation-for="DuracionSegundos" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tipo</label>
+                        <select asp-for="Tipo" class="form-select">
+                            <option value="">Seleccionar...</option>
+                            <option>Rodaje</option>
+                            <option>Series</option>
+                            <option>Fartlek</option>
+                            <option>Tirada Larga</option>
+                            <option>Carrera</option>
+                        </select>
+                        <span asp-validation-for="Tipo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Comentarios</label>
+                        <textarea asp-for="Comentarios" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Comentarios" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-action="Index" class="btn btn-secondary">⬅ Volver</a>
+                        <button type="submit" class="btn btn-primary">💾 Guardar</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

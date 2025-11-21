@@ -1,0 +1,59 @@
+@model IEnumerable<R4G.App.Models.Carrera>
+
+@{
+    ViewData["Title"] = "Carreras";
+}
+
+<h1 class="mb-4">🏁 Carreras</h1>
+
+<a class="btn btn-success mb-4" asp-action="Create">
+    ➕ Añadir Carrera
+</a>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+@foreach (var c in Model)
+{
+    <div class="col">
+        <div class="card shadow-sm carrera-card">
+            <div class="card-body">
+
+                <h4 class="fw-bold">@c.Nombre</h4>
+
+                <p class="text-muted mb-2">
+                    📅 @c.Fecha.ToString("dd/MM/yyyy")
+                </p>
+
+                <p class="mb-1"><strong>Distancia:</strong> @c.DistanciaKm km</p>
+
+                <p class="mb-1">
+                    <strong>Tiempo:</strong>
+                    @($"{c.TiempoHoras:D2}:{c.TiempoMinutos:D2}:{c.TiempoSegundos:D2}")
+                </p>
+
+                <p class="mb-1">
+                    <strong>Ritmo:</strong> @c.RitmoMedio
+                </p>
+
+                <p class="mb-2">
+                    <strong>Velocidad:</strong> @c.VelocidadMedia.ToString("0.0") km/h
+                </p>
+
+                @if (!string.IsNullOrWhiteSpace(c.Comentarios))
+                {
+                    <p class="mt-2 text-muted"><em>"@c.Comentarios"</em></p>
+                }
+
+                <hr />
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Details" asp-route-id="@c.Id" class="btn btn-info btn-sm text-white">Detalles</a>
+                    <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+</div>
