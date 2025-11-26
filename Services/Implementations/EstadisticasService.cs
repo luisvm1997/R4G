@@ -2,20 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using R4G.App.Models;
+using R4G.App.Services.Interfaces;
 
 namespace R4G.App.Services
 {
-    public class EstadisticasService
+    public class EstadisticasService : IEstadisticasService
     {
-        // ⭐ Distancia total
         public double DistanciaTotal(List<Entrenamiento> entrenos)
             => entrenos.Sum(e => e.DistanciaKm);
 
-        // ⭐ Tiempo total
         public TimeSpan TiempoTotal(List<Entrenamiento> entrenos)
             => TimeSpan.FromMinutes(entrenos.Sum(e => e.MinutosTotales));
 
-        // ⭐ Ritmo medio global
         public string RitmoMedioGlobal(List<Entrenamiento> entrenos)
         {
             double dist = entrenos.Sum(e => e.DistanciaKm);
@@ -31,7 +29,6 @@ namespace R4G.App.Services
             return $"{min}:{sec:D2} /km";
         }
 
-        // ⭐ Velocidad media global
         public double VelocidadMediaGlobal(List<Entrenamiento> entrenos)
         {
             double minutosTotales = entrenos.Sum(e => e.MinutosTotales);
@@ -40,11 +37,9 @@ namespace R4G.App.Services
             return entrenos.Sum(e => e.DistanciaKm) / (minutosTotales / 60.0);
         }
 
-        // ⭐ Último entrenamiento
         public Entrenamiento? UltimoEntrenamiento(List<Entrenamiento> entrenos)
             => entrenos.OrderByDescending(e => e.Fecha).FirstOrDefault();
 
-        // ⭐ Mejor marca según distancia
         public string MejorMarca(List<Entrenamiento> entrenos, double distanciaObjetivo)
         {
             double margen = distanciaObjetivo switch
@@ -67,10 +62,9 @@ namespace R4G.App.Services
 
             var mejor = candidatos.First();
 
-            return $"{mejor.RitmoMedio} ({mejor.DistanciaKm} km)";
+            return FormatearDuracion(mejor.Duracion);
         }
 
-        // ⭐ KMs por mes
         public Dictionary<string, double> KmsPorMes(List<Entrenamiento> entrenos)
         {
             return entrenos
@@ -82,7 +76,6 @@ namespace R4G.App.Services
                 );
         }
 
-        // ⭐ KMs del mes actual
         public double KmsDelMesActual(List<Entrenamiento> entrenos)
         {
             var hoy = DateTime.Now;
@@ -91,7 +84,6 @@ namespace R4G.App.Services
                 .Sum(e => e.DistanciaKm);
         }
 
-        // ⭐ KMs de la semana actual
         public double KmsDeLaSemanaActual(List<Entrenamiento> entrenos)
         {
             var hoy = DateTime.Now;
@@ -101,6 +93,15 @@ namespace R4G.App.Services
             return entrenos
                 .Where(e => e.Fecha >= inicioSemana && e.Fecha < finSemana)
                 .Sum(e => e.DistanciaKm);
+        }
+
+        private static string FormatearDuracion(TimeSpan duracion)
+        {
+            // Si hay horas, mostramos h:mm:ss; si no, solo mm:ss
+            if (duracion.TotalHours >= 1)
+                return duracion.ToString(@"h\:mm\:ss");
+
+            return duracion.ToString(@"m\:ss");
         }
     }
 }

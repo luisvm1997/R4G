@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App/R4G.App.csproj": {}
+    "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App.csproj": {}
   },
   "projects": {
-    "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App/R4G.App.csproj": {
+    "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App/R4G.App.csproj",
+        "projectUniqueName": "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App.csproj",
         "projectName": "R4G.App",
-        "projectPath": "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App/R4G.App.csproj",
+        "projectPath": "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App.csproj",
         "packagesPath": "/Users/luisvillanuevamorales/.nuget/packages/",
-        "outputPath": "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App/obj/",
+        "outputPath": "/Users/luisvillanuevamorales/Desktop/R4G/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/luisvillanuevamorales/.nuget/NuGet/NuGet.Config"
@@ -58,6 +58,10 @@
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[8.0.0, )"
             },

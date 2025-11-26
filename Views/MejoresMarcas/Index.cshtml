@@ -1,60 +1,52 @@
-@model R4G.App.Models.MarcaPersonal
+@model R4G.App.ViewModels.MejorMarcaViewModel
 
 @{
     ViewData["Title"] = "Mejores Marcas";
+    string Show(string? v) => string.IsNullOrWhiteSpace(v) || v.Trim() == "-" ? "— · — · —" : v!;
 }
 
-<section class="container my-5">
+@section Styles {
+    <link rel="stylesheet" href="~/css/mejoresMarcas.css" asp-append-version="true" />
+}
+
+<section class="container my-5 mejores-marcas">
     <h1 class="text-center fw-bold mb-5">🏅 Mejores Marcas</h1>
 
-    <form asp-action="Guardar" method="post">
-        <div class="row text-center">
+    <div class="row text-center">
 
-            <div class="col-md-4 mb-4">
-                <div class="stat-box shadow-sm">
-                    <h2 class="fw-bold">1K</h2>
-                    <p class="text-muted mb-1">@Model.Mejor1K</p>
-                    <input asp-for="Mejor1K" class="form-control" placeholder="Ej: 3:45 min" />
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="stat-box shadow-sm">
-                    <h2 class="fw-bold">5K</h2>
-                    <p class="text-muted mb-1">@Model.Mejor5K</p>
-                    <input asp-for="Mejor5K" class="form-control" placeholder="Ej: 24:02 min" />
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="stat-box shadow-sm">
-                    <h2 class="fw-bold">10K</h2>
-                    <p class="text-muted mb-1">@Model.Mejor10K</p>
-                    <input asp-for="Mejor10K" class="form-control" placeholder="Ej: 50:00 min" />
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="stat-box shadow-sm">
-                    <h2 class="fw-bold">Media Maratón</h2>
-                    <p class="text-muted mb-1">@Model.MejorMedia</p>
-                    <input asp-for="MejorMedia" class="form-control" placeholder="Ej: 1:55:00" />
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="stat-box shadow-sm">
-                    <h2 class="fw-bold">Maratón</h2>
-                    <p class="text-muted mb-1">@Model.MejorMaraton</p>
-                    <input asp-for="MejorMaraton" class="form-control" placeholder="Ej: 4:15:00" />
-                </div>
+        <div class="col-md-4 mb-4">
+            <div class="stat-box shadow-sm marca-card">
+                <div class="dist-box">1K</div>
+                <div class="time-box">@Show(Model.Mejor1K)</div>
             </div>
         </div>
 
-        <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary btn-lg px-5">
-                Guardar cambios
-            </button>
+        <div class="col-md-4 mb-4">
+            <div class="stat-box shadow-sm marca-card">
+                <div class="dist-box">5K</div>
+                <div class="time-box">@Show(Model.Mejor5K)</div>
+            </div>
         </div>
-    </form>
+
+        <div class="col-md-4 mb-4">
+            <div class="stat-box shadow-sm marca-card">
+                <div class="dist-box">10K</div>
+                <div class="time-box">@Show(Model.Mejor10K)</div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="stat-box shadow-sm marca-card">
+                <div class="dist-box">Media Maratón</div>
+                <div class="time-box">@Show(Model.MejorMedia)</div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="stat-box shadow-sm marca-card">
+                <div class="dist-box">Maratón</div>
+                <div class="time-box">@Show(Model.MejorMaraton)</div>
+            </div>
+        </div>
+    </div>
 </section>

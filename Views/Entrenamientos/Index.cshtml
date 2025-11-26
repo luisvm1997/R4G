@@ -1,7 +1,11 @@
-@model IEnumerable<R4G.App.Models.Entrenamiento>
+@model IEnumerable<R4G.App.ViewModels.EntrenamientoDto>
 
 @{
     ViewData["Title"] = "Entrenamientos";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/entrenamientos.css" asp-append-version="true" />
 }
 
 <h1 class="mb-4">🏃 Entrenamientos</h1>
@@ -31,15 +35,19 @@
                     <strong>Distancia:</strong> @e.DistanciaKm km
                 </p>
 
-                <p class="mb-1">
-                    <strong>Duración:</strong>
-                    @($"{e.DuracionHoras:D2}:{e.DuracionMinutos:D2}:{e.DuracionSegundos:D2}")
-                </p>
+            <p class="mb-1">
+                <strong>Duración:</strong>
+                @e.DuracionFormateada
+            </p>
 
-                <!-- ⭐ NUEVO: RITMO MEDIO -->
-                <p class="mb-1">
-                    <strong>Ritmo medio:</strong> @e.RitmoMedio
-                </p>
+            <!-- ⭐ NUEVO: RITMO MEDIO -->
+            <p class="mb-1">
+                <strong>Ritmo medio:</strong> @e.RitmoMedio
+            </p>
+
+            <p class="mb-1">
+                <strong>Velocidad media:</strong> @e.VelocidadMedia.ToString("0.0") km/h
+            </p>
 
                 @if (!string.IsNullOrWhiteSpace(e.Comentarios))
                 {

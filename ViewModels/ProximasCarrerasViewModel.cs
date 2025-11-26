@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
+using R4G.App.Models;
 
-namespace R4G.App.Models
+namespace R4G.App.ViewModels
 {
-    public class ProximasCarrerasViewModel
+    public record ProximasCarrerasViewModel
     {
-        public List<ProximaCarrera> CarrerasAragon { get; set; } = new();
-        public List<ProximaCarrera> CarrerasEspana { get; set; } = new();
+        public IReadOnlyList<ProximaCarrera> CarrerasAragon { get; init; } = Array.Empty<ProximaCarrera>();
+        public IReadOnlyList<ProximaCarrera> CarrerasEspana { get; init; } = Array.Empty<ProximaCarrera>();
     }
 }

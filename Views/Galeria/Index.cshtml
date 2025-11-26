@@ -1,0 +1,50 @@
+@using System.IO
+@model List<string>
+
+@{
+    ViewData["Title"] = "Galería";
+    string[] videoExt = new[] { ".mp4", ".mov", ".webm" };
+}
+
+<section class="container my-4">
+    <h1 class="fw-bold mb-4">📸 Galería</h1>
+
+    @if (TempData["GaleriaMsg"] is string msg)
+    {
+        <div class="alert alert-info">@msg</div>
+    }
+
+    <form asp-action="Subir" method="post" enctype="multipart/form-data" class="mb-4">
+        <div class="input-group">
+            <input type="file" name="archivo" accept=".jpg,.jpeg,.png,.gif,.webp,.mp4,.mov,.webm" class="form-control" required />
+            <button class="btn btn-primary" type="submit">Subir</button>
+        </div>
+        <small class="text-muted">Formatos: jpg, png, gif, webp, mp4, mov, webm</small>
+    </form>
+
+    <div class="row g-3">
+        @foreach (var file in Model)
+        {
+            var ext = System.IO.Path.GetExtension(file)?.ToLowerInvariant() ?? string.Empty;
+            var isVideo = Array.IndexOf(videoExt, ext) >= 0;
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                    @if (isVideo)
+                    {
+                        <video controls class="card-img-top" style="object-fit: cover; height: 180px;">
+                            <source src="~/uploads/@file" type="video/@ext.TrimStart('.')">
+                            Tu navegador no soporta video.
+                        </video>
+                    }
+                    else
+                    {
+                        <img src="~/uploads/@file" class="card-img-top" alt="@file" style="object-fit: cover; height: 180px;">
+                    }
+                    <div class="card-body">
+                        <p class="card-text text-truncate">@file</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

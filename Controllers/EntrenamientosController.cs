@@ -1,133 +1,111 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using R4G.App.Data;
 using R4G.App.Models;
+using R4G.App.Services.Interfaces;
+using R4G.App.ViewModels;
 
 namespace R4G.App.Controllers
 {
+    [Authorize]
     public class EntrenamientosController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IEntrenamientosService _service;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public EntrenamientosController(
-            ApplicationDbContext context,
+            IEntrenamientosService service,
             UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _service = service;
             _userManager = userManager;
         }
 
-        private string? GetUserId() => _userManager.GetUserId(User);
+        private string GetUserId() => _userManager.GetUserId(User)!;
 
-        // GET: Entrenamientos
         public async Task<IActionResult> Index()
         {
-            var userId = GetUserId();
-            var entrenos = await _context.Entrenamientos
-                .Where(e => e.UsuarioId == userId)
-                .OrderByDescending(e => e.Fecha)
-                .ToListAsync();
-
-            return View(entrenos);
+            var entrenos = await _service.GetUserEntrenos(GetUserId());
+            var vm = entrenos.Select(ToDto).ToList();
+            return View(vm);
         }
 
-        // DETAILS
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null) return NotFound();
-
-            var userId = GetUserId();
-            var entreno = await _context.Entrenamientos
-                .FirstOrDefaultAsync(e => e.Id == id && e.UsuarioId == userId);
-
+            var entreno = await _service.GetEntreno(id, GetUserId());
             if (entreno == null) return NotFound();
-
-            return View(entreno);
+            return View(ToDto(entreno));
         }
 
-        // CREATE
-        public IActionResult Create()
+        public IActionResult Create() => View(new EntrenamientoDto());
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(EntrenamientoDto model)
         {
-            return View();
+            if (!ModelState.IsValid)
+                return View(model);
+
+            await _service.AddEntreno(ToEntity(model), GetUserId());
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var entreno = await _service.GetEntreno(id, GetUserId());
+            if (entreno == null) return NotFound();
+            return View(ToDto(entreno));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Entrenamiento entrenamiento)
+        public async Task<IActionResult> Edit(int id, EntrenamientoDto model)
         {
-            entrenamiento.UsuarioId = GetUserId()!;
+            if (id != model.Id) return NotFound();
+            if (!ModelState.IsValid) return View(model);
 
-            if (ModelState.IsValid)
-            {
-                _context.Add(entrenamiento);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(entrenamiento);
+            await _service.UpdateEntreno(ToEntity(model), GetUserId());
+            return RedirectToAction(nameof(Index));
         }
 
-        // EDIT
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null) return NotFound();
-
-            var userId = GetUserId();
-            var entreno = await _context.Entrenamientos
-                .FirstOrDefaultAsync(e => e.Id == id && e.UsuarioId == userId);
-
+            var entreno = await _service.GetEntreno(id, GetUserId());
             if (entreno == null) return NotFound();
-
-            return View(entreno);
+            return View(ToDto(entreno));
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Entrenamiento entrenamiento)
-        {
-            if (id != entrenamiento.Id) return NotFound();
-
-            entrenamiento.UsuarioId = GetUserId()!;
-
-            if (ModelState.IsValid)
-            {
-                _context.Update(entrenamiento);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(entrenamiento);
-        }
-
-        // DELETE
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var userId = GetUserId();
-            var entreno = await _context.Entrenamientos
-                .FirstOrDefaultAsync(e => e.Id == id && e.UsuarioId == userId);
-
-            if (entreno == null) return NotFound();
-
-            return View(entreno);
-        }
-
-        [HttpPost, ActionName("Delete")]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var userId = GetUserId();
-            var entreno = await _context.Entrenamientos
-                .FirstOrDefaultAsync(e => e.Id == id && e.UsuarioId == userId);
-
-            if (entreno != null)
-            {
-                _context.Entrenamientos.Remove(entreno);
-                await _context.SaveChangesAsync();
-            }
-
+            await _service.DeleteEntreno(id, GetUserId());
             return RedirectToAction(nameof(Index));
         }
+
+        private static EntrenamientoDto ToDto(Entrenamiento e) => new()
+        {
+            Id = e.Id,
+            Fecha = e.Fecha,
+            DistanciaKm = e.DistanciaKm,
+            DuracionHoras = e.DuracionHoras,
+            DuracionMinutos = e.DuracionMinutos,
+            DuracionSegundos = e.DuracionSegundos,
+            Tipo = e.Tipo,
+            Comentarios = e.Comentarios
+        };
+
+        private static Entrenamiento ToEntity(EntrenamientoDto dto) => new()
+        {
+            Id = dto.Id,
+            Fecha = dto.Fecha,
+            DistanciaKm = dto.DistanciaKm,
+            DuracionHoras = dto.DuracionHoras,
+            DuracionMinutos = dto.DuracionMinutos,
+            DuracionSegundos = dto.DuracionSegundos,
+            Tipo = dto.Tipo,
+            Comentarios = dto.Comentarios
+        };
     }
 }

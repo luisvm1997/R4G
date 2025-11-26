@@ -1,127 +1,130 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using R4G.App.Data;
 using R4G.App.Models;
+using R4G.App.Services.Interfaces;
+using R4G.App.ViewModels;
 
 namespace R4G.App.Controllers
 {
+    [Authorize]
     public class CarrerasController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICarrerasService _service;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public CarrerasController(
-            ApplicationDbContext context,
+            ICarrerasService service,
             UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _service = service;
             _userManager = userManager;
         }
 
-        private string? GetUserId() => _userManager.GetUserId(User);
+        private string GetUserId() => _userManager.GetUserId(User)!;
 
         public async Task<IActionResult> Index()
         {
-            var userId = GetUserId();
-            var carreras = await _context.Carreras
-                .Where(c => c.UsuarioId == userId)
-                .ToListAsync();
-
-            return View(carreras);
+            var carreras = await _service.GetAllAsync(GetUserId());
+            var vm = carreras.Select(ToDto).ToList();
+            return View(vm);
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null) return NotFound();
-
-            var userId = GetUserId();
-            var carrera = await _context.Carreras
-                .FirstOrDefaultAsync(m => m.Id == id && m.UsuarioId == userId);
-
+            var carrera = await _service.GetByIdAsync(id, GetUserId());
             if (carrera == null) return NotFound();
 
-            return View(carrera);
+            return View(ToDto(carrera));
         }
 
-        public IActionResult Create()
+        public IActionResult Create() => View(new CarreraDto());
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CarreraDto model)
         {
-            return View();
+            if (!ModelState.IsValid) return View(model);
+
+            var ok = await _service.CreateAsync(ToEntity(model), GetUserId());
+            if (!ok)
+            {
+                ModelState.AddModelError(string.Empty, "No se pudo crear la carrera. Inténtalo de nuevo.");
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var carrera = await _service.GetByIdAsync(id, GetUserId());
+            if (carrera == null) return NotFound();
+
+            return View(ToDto(carrera));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Carrera carrera)
+        public async Task<IActionResult> Edit(int id, CarreraDto model)
         {
-            carrera.UsuarioId = GetUserId()!;
+            if (id != model.Id) return NotFound();
+            if (!ModelState.IsValid) return View(model);
 
-            if (ModelState.IsValid)
+            var ok = await _service.UpdateAsync(ToEntity(model), GetUserId());
+            if (!ok)
             {
-                _context.Add(carrera);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ModelState.AddModelError(string.Empty, "No se pudo actualizar la carrera. Inténtalo de nuevo.");
+                return View(model);
             }
-            return View(carrera);
+
+            return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null) return NotFound();
-
-            var userId = GetUserId();
-            var carrera = await _context.Carreras
-                .FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == userId);
-
+            var carrera = await _service.GetByIdAsync(id, GetUserId());
             if (carrera == null) return NotFound();
 
-            return View(carrera);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Carrera carrera)
-        {
-            if (id != carrera.Id) return NotFound();
-
-            carrera.UsuarioId = GetUserId()!;
-
-            if (ModelState.IsValid)
-            {
-                _context.Update(carrera);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(carrera);
-        }
-
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var userId = GetUserId();
-            var carrera = await _context.Carreras
-                .FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == userId);
-
-            if (carrera == null) return NotFound();
-
-            return View(carrera);
+            return View(ToDto(carrera));
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var userId = GetUserId();
-            var carrera = await _context.Carreras
-                .FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == userId);
-
-            if (carrera != null)
-            {
-                _context.Carreras.Remove(carrera);
-                await _context.SaveChangesAsync();
-            }
-
+            await _service.DeleteAsync(id, GetUserId());
             return RedirectToAction(nameof(Index));
         }
+
+        private static CarreraDto ToDto(Carrera c) => new()
+        {
+            Id = c.Id,
+            Nombre = c.Nombre,
+            Fecha = c.Fecha,
+            DistanciaKm = c.DistanciaKm,
+            TiempoHoras = c.TiempoHoras,
+            TiempoMinutos = c.TiempoMinutos,
+            TiempoSegundos = c.TiempoSegundos,
+            Ciudad = c.Ciudad,
+            PosicionGeneral = c.PosicionGeneral,
+            PosicionCategoria = c.PosicionCategoria,
+            Comentarios = c.Comentarios
+        };
+
+        private static Carrera ToEntity(CarreraDto dto) => new()
+        {
+            Id = dto.Id,
+            Nombre = dto.Nombre,
+            Fecha = dto.Fecha,
+            DistanciaKm = dto.DistanciaKm,
+            TiempoHoras = dto.TiempoHoras,
+            TiempoMinutos = dto.TiempoMinutos,
+            TiempoSegundos = dto.TiempoSegundos,
+            Ciudad = dto.Ciudad,
+            PosicionGeneral = dto.PosicionGeneral,
+            PosicionCategoria = dto.PosicionCategoria,
+            Comentarios = dto.Comentarios
+        };
     }
 }

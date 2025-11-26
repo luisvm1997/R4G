@@ -1,4 +1,4 @@
-@model IEnumerable<R4G.App.Models.Carrera>
+@model IEnumerable<R4G.App.ViewModels.CarreraDto>
 
 @{
     ViewData["Title"] = "Carreras";
@@ -28,7 +28,7 @@
 
                 <p class="mb-1">
                     <strong>Tiempo:</strong>
-                    @($"{c.TiempoHoras:D2}:{c.TiempoMinutos:D2}:{c.TiempoSegundos:D2}")
+                    @c.DuracionFormateada
                 </p>
 
                 <p class="mb-1">

@@ -1,6 +1,85 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Política de Privacidad";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+@section Styles {
+    <link rel="stylesheet" href="~/css/privacy.css" asp-append-version="true" />
+}
+
+<div class="container privacy-wrap">
+
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="card privacy-card">
+
+    <p>
+        En <strong>Run For Glory (R4G)</strong> nos tomamos muy en serio la privacidad de nuestros usuarios. 
+        Este documento explica cómo recopilamos, utilizamos y protegemos tu información personal dentro de nuestra 
+        aplicación web.
+    </p>
+
+    <h3 class="mt-4">1. Información que recopilamos</h3>
+    <p>R4G recopila únicamente la información necesaria para ofrecer sus funcionalidades:</p>
+    <ul>
+        <li><strong>Datos de registro:</strong> correo electrónico y contraseña (cifrados mediante Identity).</li>
+        <li><strong>Datos deportivos:</strong> entrenamientos, carreras, marcas personales y estadísticas.</li>
+        <li><strong>No recopilamos datos sensibles</strong> ni información que no esté relacionada directamente con el uso de la aplicación.</li>
+    </ul>
+
+    <h3 class="mt-4">2. Cómo utilizamos tus datos</h3>
+    <p>Los datos almacenados se usan exclusivamente para:</p>
+    <ul>
+        <li>Mostrar tus entrenamientos y estadísticas personales.</li>
+        <li>Generar tus mejores marcas y gráficas de actividad.</li>
+        <li>Gestionar tus carreras registradas y próximas competiciones.</li>
+        <li>Garantizar la correcta autenticación y seguridad de tu cuenta.</li>
+    </ul>
+
+    <h3 class="mt-4">3. Con quién compartimos tus datos</h3>
+    <p>
+        <strong>No compartimos, vendemos ni cedemos tus datos a terceros.</strong><br>
+        Toda la información permanece exclusivamente en el entorno de ejecución de R4G (base de datos propia).
+    </p>
+
+    <h3 class="mt-4">4. Seguridad</h3>
+    <p>
+        R4G utiliza los mecanismos de seguridad proporcionados por 
+        <strong>ASP.NET Core Identity</strong>, incluyendo:
+    </p>
+    <ul>
+        <li>Cifrado seguro de contraseñas (hash + salt).</li>
+        <li>Sistema de autenticación protegido.</li>
+        <li>Acceso restringido a los datos del usuario mediante filtros y controladores.</li>
+    </ul>
+
+    <h3 class="mt-4">5. Conservación de los datos</h3>
+    <p>
+        Tus datos permanecerán almacenados mientras mantengas activa tu cuenta. 
+        En caso de eliminarla, toda tu información será eliminada de forma permanente.
+    </p>
+
+    <h3 class="mt-4">6. Tus derechos</h3>
+    <p>Puedes solicitar en cualquier momento:</p>
+    <ul>
+        <li>Acceder a tus datos.</li>
+        <li>Modificar o eliminar tu información personal.</li>
+        <li>Dar de baja tu cuenta.</li>
+    </ul>
+
+    <h3 class="mt-4">7. Responsabilidad del usuario</h3>
+    <p>
+        Debes mantener la confidencialidad de tus credenciales de acceso y no compartirlas con terceros.
+    </p>
+
+    <h3 class="mt-4">8. Cambios en esta política</h3>
+    <p>
+        R4G puede actualizar esta política ocasionalmente. Las modificaciones serán comunicadas a través de la aplicación.
+    </p>
+
+    <h3 class="mt-4">Contacto</h3>
+    <p>
+        Si tienes dudas o deseas ejercer tus derechos, puedes ponerte en contacto a través del correo asociado a tu cuenta.
+    </p>
+
+</div>
+</div>

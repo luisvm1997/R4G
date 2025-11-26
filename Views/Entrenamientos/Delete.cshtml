@@ -1,4 +1,4 @@
-@model R4G.App.Models.Entrenamiento
+@model R4G.App.ViewModels.EntrenamientoDto
 
 @{
     ViewData["Title"] = "Eliminar Entrenamiento";
@@ -13,7 +13,7 @@
 
             <p><strong>Fecha:</strong> @Model.Fecha.ToString("dd/MM/yyyy")</p>
             <p><strong>Distancia:</strong> @Model.DistanciaKm km</p>
-            <p><strong>Duración:</strong> @($"{Model.DuracionHoras:D2}:{Model.DuracionMinutos:D2}:{Model.DuracionSegundos:D2}")</p>
+            <p><strong>Duración:</strong> @Model.DuracionFormateada</p>
             <p><strong>Tipo:</strong> @Model.Tipo</p>
 
             <hr />
@@ -33,4 +33,3 @@
 
     </div>
 </div>
-

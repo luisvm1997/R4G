@@ -1,4 +1,4 @@
-@model R4G.App.Models.Carrera
+@model R4G.App.ViewModels.CarreraDto
 
 <div class="card p-4 shadow-sm">
 
@@ -12,11 +12,7 @@
     <hr />
 
     <h4>Tiempo registrado</h4>
-    <p>
-        @Model.TiempoHoras h 
-        @Model.TiempoMinutos m 
-        @Model.TiempoSegundos s
-    </p>
+    <p>@Model.DuracionFormateada</p>
 
     <hr />
 

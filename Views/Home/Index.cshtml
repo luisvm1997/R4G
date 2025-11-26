@@ -4,11 +4,47 @@
     ViewData["Title"] = "Inicio";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+}
+
 <!-- HERO PANORÁMICO -->
 <section class="hero-section mb-5">
+
 </section>
 
 <div class="container">
+
+    <!-- BIO / HISTORIA -->
+    <section class="home-section white bio-section">
+        <h2 class="section-title text-center mb-4">🏅 ¿Qué es Run For Glory? — Biografía oficial</h2>
+
+        <p class="lead bio-text">
+            Run For Glory (R4G) es una plataforma creada por y para corredores que buscan superarse cada día.
+            Nace con una idea muy clara: convertir tu progreso en motivación, ayudarte a entender tus entrenamientos
+            y mostrarte el camino hacia tus próximas metas.
+        </p>
+
+        <div class="mt-4 mb-3">
+            <ul class="bio-list">
+                <li>🏃‍♂️ <strong>Registrar todos tus entrenamientos</strong> y ver tu evolución real.</li>
+                <li>📊 <strong>Analizar tus estadísticas</strong>: ritmo, distancia, velocidad media, mejores marcas…</li>
+                <li>🗓️ <strong>Descubrir próximas carreras</strong> de tu ciudad y del resto de España.</li>
+                <li>🥇 <strong>Guardar tus logros personales</strong> y comparar tus mejores tiempos.</li>
+                <li>🚀 <strong>Visualizar tu progreso mensual y semanal</strong> para saber si estás cumpliendo tus objetivos.</li>
+            </ul>
+        </div>
+
+        <p class="text-muted mt-3 bio-text">
+            R4G combina simplicidad, diseño cuidado y herramientas útiles pensadas para corredores de todos los niveles:
+            desde quien empieza a correr hasta quien prepara un 10K, media maratón o su primer maratón.
+        </p>
+
+        <div class="bio-footer mt-4">
+            <h4 class="mb-1"><em>Tu entrenamiento, tu historia, tu victoria.</em></h4>
+            <p class="mb-0"><strong>Bienvenido a Run For Glory, donde cada zancada cuenta.</strong></p>
+        </div>
+    </section>
 
     <!-- ESTADÍSTICAS PRINCIPALES -->
     <section class="home-section white">
@@ -68,6 +104,13 @@
 
             <div class="col-md-4">
                 <div class="stat-box">
+                    <h3>@Model.Mejor1K</h3>
+                    <p>Mejor 1K</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="stat-box">
                     <h3>@Model.Mejor5K</h3>
                     <p>Mejor 5K</p>
                 </div>
@@ -87,12 +130,19 @@
                 </div>
             </div>
 
+            <div class="col-md-4">
+                <div class="stat-box">
+                    <h3>@Model.MejorMaraton</h3>
+                    <p>Mejor Maratón</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <!-- GRÁFICO MENSUAL -->
     <section class="home-section gray">
-        <h2 class="section-title">Kilómetros por mes</h2>
+        <h2 class="section-title">Kilómetros este año</h2>
 
         <canvas id="kmsChart" width="400" height="200"></canvas>
 
@@ -100,15 +150,19 @@
 
         <script>
             const kmsData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.KmsPorMes));
+            const months = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+            const year = new Date().getFullYear();
+            const labels = months.map(m => `${m}/${year}`);
+            const values = labels.map(l => kmsData[l] ?? 0);
 
             const ctx = document.getElementById('kmsChart');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: Object.keys(kmsData),
+                    labels: labels,
                     datasets: [{
                         label: 'Km recorridos',
-                        data: Object.values(kmsData),
+                        data: values,
                         borderWidth: 1
                     }]
                 },

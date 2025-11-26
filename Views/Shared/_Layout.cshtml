@@ -6,45 +6,47 @@
     <title>@ViewData["Title"] - R4G.App</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
 </head>
 
 <body class='@ViewData["BodyClass"]'>
 
-    @* Si NO es welcome-page → muestra NAVBAR *@
-    @if (ViewData["BodyClass"]?.ToString() != "welcome-page")
-    {
-        <header>
-            <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm r4g-navbar">
-                <div class="container d-flex align-items-center">
+    <div class="site-shell">
+        @* Si NO es welcome-page → muestra NAVBAR *@
+        @if (ViewData["BodyClass"]?.ToString() != "welcome-page")
+        {
+            <header>
+                <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm r4g-navbar">
+                    <div class="container d-flex align-items-center">
 
-                    <!-- LOGO -->
-                    <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
-                        <img src="/img/logo-r4g.png" alt="R4G" class="navbar-logo">
-                    </a>
+                        <!-- LOGO -->
+                        <a class="navbar-brand d-flex align-items-center" asp-controller="Home" asp-action="Index">
+                            <img src="/img/logo-r4g.png" alt="R4G" class="navbar-logo">
+                        </a>
 
-                    <!-- BOTÓN MÓVIL -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarR4G">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                        <!-- BOTÓN MÓVIL -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarR4G">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-                    <!-- MENÚ -->
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarR4G">
+                        <!-- MENÚ -->
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarR4G">
 
-                        <!-- LINKS CENTRALES -->
-                        <ul class="navbar-nav mx-auto nav-center-gap">
+                            <!-- LINKS CENTRALES -->
+                            <ul class="navbar-nav mx-auto nav-center-gap">
 
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
+                                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Entrenamientos" asp-action="Index">Entrenamientos</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Entrenamientos" asp-action="Index">Entrenamientos</a>
+                                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Carreras" asp-action="Index">Carreras</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Carreras" asp-action="Index">Carreras</a>
+                                </li>
 
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="MejoresMarcas" asp-action="Index">Mejores Marcas</a>
@@ -54,51 +56,64 @@
                                 <a class="nav-link" asp-controller="ProximasCarreras" asp-action="Index">Próximas Carreras</a>
                             </li>
 
-                        </ul>
-
-                        <!-- LOGIN / LOGOUT -->
-                        <ul class="navbar-nav ms-auto">
-
-                            @if (User.Identity?.IsAuthenticated ?? false)
-                            {
-                                <li class="nav-item d-flex align-items-center me-2">
-                                    <a class="nav-link text-primary fw-bold"
-                                       asp-area="Identity"
-                                       asp-page="/Account/Manage/Index">
-                                        Hola @User.Identity.Name
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <form asp-area="Identity" asp-page="/Account/Logout" method="post">
-                                        <button class="btn btn-outline-danger">Logout</button>
-                                    </form>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="btn btn-primary"
-                                       asp-area="Identity"
-                                       asp-page="/Account/Login">
-                                        Login
-                                    </a>
-                                </li>
-                            }
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Galeria" asp-action="Index">Galería</a>
+                            </li>
 
                         </ul>
+
+                            <!-- LOGIN / LOGOUT -->
+                            <ul class="navbar-nav ms-auto">
+
+                                @if (User.Identity?.IsAuthenticated ?? false)
+                                {
+                                    <li class="nav-item d-flex align-items-center me-2">
+                                        <a class="nav-link text-primary fw-bold"
+                                           asp-area="Identity"
+                                           asp-page="/Account/Manage/Index">
+                                            Hola @User.Identity.Name
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                            <button class="btn btn-outline-danger">Logout</button>
+                                        </form>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="btn btn-primary"
+                                           asp-area="Identity"
+                                           asp-page="/Account/Login">
+                                            Login
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+
                     </div>
+                </nav>
+            </header>
+        }
 
-                </div>
-            </nav>
-        </header>
-    }
+        <!-- MAIN -->
+        <div class="container-fluid p-0 site-main">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
 
-    <!-- MAIN -->
-    <div class="container-fluid p-0">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        <footer class="site-footer text-center text-muted py-3">
+            <div class="container d-flex justify-content-center align-items-center gap-2 flex-wrap">
+                <span>© @DateTime.Now.Year - R4G</span>
+                <span class="text-secondary">|</span>
+                <a asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-muted">Privacy</a>
+            </div>
+        </footer>
     </div>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

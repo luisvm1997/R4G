@@ -7,6 +7,7 @@ namespace R4G.App.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string UsuarioId { get; set; } = string.Empty;
 
         [Required]

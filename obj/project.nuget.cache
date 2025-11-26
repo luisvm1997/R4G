@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZQxjSEG3gpQ=",
+  "dgSpecHash": "g5qcwKB5S4U=",
   "success": true,
-  "projectFilePath": "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App/R4G.App.csproj",
+  "projectFilePath": "/Users/luisvillanuevamorales/Desktop/R4G/R4G.App.csproj",
   "expectedPackageFiles": [
     "/Users/luisvillanuevamorales/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/Users/luisvillanuevamorales/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
@@ -84,6 +84,7 @@
     "/Users/luisvillanuevamorales/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.10/microsoft.entityframeworkcore.abstractions.8.0.10.nupkg.sha512",
     "/Users/luisvillanuevamorales/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.10/microsoft.entityframeworkcore.analyzers.8.0.10.nupkg.sha512",
     "/Users/luisvillanuevamorales/.nuget/packages/microsoft.entityframeworkcore.design/8.0.0/microsoft.entityframeworkcore.design.8.0.0.nupkg.sha512",
+    "/Users/luisvillanuevamorales/.nuget/packages/microsoft.entityframeworkcore.inmemory/8.0.0/microsoft.entityframeworkcore.inmemory.8.0.0.nupkg.sha512",
     "/Users/luisvillanuevamorales/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.0/microsoft.entityframeworkcore.relational.8.0.0.nupkg.sha512",
     "/Users/luisvillanuevamorales/.nuget/packages/microsoft.entityframeworkcore.sqlserver/8.0.0/microsoft.entityframeworkcore.sqlserver.8.0.0.nupkg.sha512",
     "/Users/luisvillanuevamorales/.nuget/packages/microsoft.entityframeworkcore.tools/8.0.0/microsoft.entityframeworkcore.tools.8.0.0.nupkg.sha512",
