@@ -21,6 +21,14 @@ body {
     overflow: hidden;
 }
 
+.page-title {
+    font-weight: 800;
+    color: #0b2447;
+    margin: 16px 0 24px;
+    letter-spacing: 0.01em;
+    text-align: center;
+}
+
 .site-shell {
     min-height: 100vh;
     display: flex;
@@ -35,29 +43,34 @@ body {
    NAVBAR
 ================================ */
 .r4g-navbar {
-    padding: 10px 0;
-    background: #fff;
+    padding: 0 0 1px 0;
+    background: #fbfbfb;
     border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .navbar-logo {
-    height: 60px;
-    width: auto;
+    height: 80px;
+
 }
 
 .nav-center-gap .nav-link {
     margin: 0 12px;
+    padding: 6px 8px;
     font-weight: 600;
-    font-size: 1rem;
-    color: #444 !important;
+    font-size: 0.9rem;
+    color: #1f2937 !important;
+    letter-spacing: 0.02em;
+    border-radius: 8px;
 }
 
 .nav-center-gap .nav-link:hover {
-    color: #0d6efd !important;
+    color: #0b5ed7 !important;
+    background: #f8fafc;
 }
 
 .navbar-nav.ms-auto .nav-link {
-    font-size: 1.05rem;
+    font-size: 0.9rem;
 }
 
 .btn-outline-danger {
@@ -111,9 +124,9 @@ body.loggedout-page nav {
    BOTONES
 ================================ */
 .btn {
-    padding: .55rem 1rem;
+    padding: .5rem .95rem;
     font-weight: 600;
-    border-radius: 10px;
+    border-radius: 999px;
 }
 
 .btn-xl {
@@ -127,4 +140,74 @@ body.loggedout-page nav {
 .site-footer {
     border-top: 1px solid #e5e7eb;
     background: #fff;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 1199.98px) {
+    .navbar-logo {
+        height: 68px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .r4g-navbar .container-fluid {
+        align-items: flex-start;
+        padding-top: 8px;
+        padding-bottom: 10px;
+    }
+
+    .navbar-logo {
+        height: 58px;
+    }
+
+    .navbar-toggler {
+        border: none;
+        box-shadow: none;
+    }
+
+    .nav-center-gap {
+        width: 100%;
+        margin: 12px 0 6px;
+    }
+
+    .nav-center-gap .nav-link {
+        display: block;
+        width: 100%;
+        margin: 6px 0;
+        padding: 10px 12px;
+        border-radius: 10px;
+    }
+
+    .navbar-nav.ms-auto {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .navbar-nav.ms-auto .btn,
+    .navbar-nav.ms-auto .nav-link {
+        width: 100%;
+        text-align: left;
+    }
+
+    .site-main {
+        padding-top: 2px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    body {
+        font-size: 15px;
+    }
+
+    .navbar-logo {
+        height: 52px;
+    }
+
+    .site-footer .container {
+        gap: 4px;
+    }
 }

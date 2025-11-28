@@ -9,15 +9,13 @@
 }
 
 <!-- HERO PANORÁMICO -->
-<section class="hero-section mb-5">
-
-</section>
+<section class="hero-section mb-5"></section>
 
 <div class="container">
 
     <!-- BIO / HISTORIA -->
     <section class="home-section white bio-section">
-        <h2 class="section-title text-center mb-4">🏅 ¿Qué es Run For Glory? — Biografía oficial</h2>
+        <h2 class="section-title text-center mb-4">¿Qué es Run For Glory?</h2>
 
         <p class="lead bio-text">
             Run For Glory (R4G) es una plataforma creada por y para corredores que buscan superarse cada día.
@@ -27,11 +25,11 @@
 
         <div class="mt-4 mb-3">
             <ul class="bio-list">
-                <li>🏃‍♂️ <strong>Registrar todos tus entrenamientos</strong> y ver tu evolución real.</li>
-                <li>📊 <strong>Analizar tus estadísticas</strong>: ritmo, distancia, velocidad media, mejores marcas…</li>
-                <li>🗓️ <strong>Descubrir próximas carreras</strong> de tu ciudad y del resto de España.</li>
-                <li>🥇 <strong>Guardar tus logros personales</strong> y comparar tus mejores tiempos.</li>
-                <li>🚀 <strong>Visualizar tu progreso mensual y semanal</strong> para saber si estás cumpliendo tus objetivos.</li>
+                <li><strong>Registrar todos tus entrenamientos</strong> y ver tu evolución real.</li>
+                <li><strong>Analizar tus estadísticas</strong>: ritmo, distancia, velocidad media, mejores marcas…</li>
+                <li><strong>Descubrir próximas carreras</strong> de tu ciudad y del resto de España.</li>
+                <li><strong>Guardar tus logros personales</strong> y comparar tus mejores tiempos.</li>
+                <li><strong>Visualizar tu progreso mensual y semanal</strong> para saber si estás cumpliendo tus objetivos.</li>
             </ul>
         </div>
 
@@ -82,8 +80,8 @@
 
         @if (Model.UltimoEntrenamiento != null)
         {
-            <div class="card p-4 mx-auto" style="max-width: 650px;">
-                <h4>@Model.UltimoEntrenamiento.Fecha.ToString("dd MMMM yyyy")</h4>
+            <div class="card p-4 ultimo-entrenamiento-card">
+                <h4 class="ultimo-entrenamiento-fecha">@Model.UltimoEntrenamiento.Fecha.ToString("dd 'de' MMMM yyyy", new System.Globalization.CultureInfo("es-ES"))</h4>
                 <p><strong>Distancia:</strong> @Model.UltimoEntrenamiento.DistanciaKm km</p>
                 <p><strong>Ritmo:</strong> @Model.UltimoEntrenamiento.RitmoMedio</p>
                 <p><strong>Duración:</strong> @Model.UltimoEntrenamiento.Duracion.ToString(@"hh\:mm\:ss")</p>
@@ -179,8 +177,12 @@
 
     <!-- FRASE MOTIVACIONAL -->
     <section class="motivacion">
-        <h2>"Corro porque caminar me cansa"</h2>
-        <p>Sergio Turull (Pitufollow)</p>
+        <div class="motivacion-content">
+            <img src="/img/pitu-removebg-preview.png" alt="Sergio Turull (Pitufollow)" class="motivacion-img" />
+            <div>
+                <h2>"Corro porque caminar me cansa" - Sergio Turull (Pitufollow)</h2>
+            </div>
+        </div>
     </section>
 
 </div>

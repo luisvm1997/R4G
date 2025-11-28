@@ -39,6 +39,15 @@ namespace R4G.App.Repositories
             return Task.CompletedTask;
         }
 
+        public Task<Carrera?> GetByNameAndDateAsync(string userId, string nombre, DateTime fecha)
+        {
+            return _context.Carreras
+                .FirstOrDefaultAsync(c =>
+                    c.UsuarioId == userId &&
+                    c.Nombre == nombre &&
+                    c.Fecha.Date == fecha.Date);
+        }
+
         public Task DeleteAsync(Carrera carrera)
         {
             _context.Carreras.Remove(carrera);

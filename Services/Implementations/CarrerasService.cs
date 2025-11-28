@@ -53,5 +53,15 @@ namespace R4G.App.Services
             await _repo.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> DeleteByNameAndDateAsync(string userId, string nombre, DateTime fecha)
+        {
+            var carrera = await _repo.GetByNameAndDateAsync(userId, nombre, fecha);
+            if (carrera == null) return false;
+
+            await _repo.DeleteAsync(carrera);
+            await _repo.SaveChangesAsync();
+            return true;
+        }
     }
 }

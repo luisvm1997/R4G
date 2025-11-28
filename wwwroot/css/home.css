@@ -5,9 +5,8 @@
 /* Hero sección home */
 .hero-section {
     /* usa ruta relativa para evitar problemas con paths base */
-    background:  url('../img/RFG_BANNER.png') center/cover no-repeat;
-    min-height: 280px;
-    border-radius: 16px;
+    background:  url('../img/RFG_BANNER.png') center 51.5%/cover no-repeat;
+    min-height: 255px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -61,17 +60,24 @@
     color: #6c757d;
 }
 
+.ultimo-entrenamiento-card {
+    width: 100%;
+    max-width: none;
+}
+
+.ultimo-entrenamiento-fecha {
+    color: #c0392b;
+    font-weight: 700;
+}
+
 /* Bio */
 .bio-section {
     width: 100%;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .bio-section p {
-    max-width: 960px;
-    margin: 0 auto 12px auto;
+    max-width: 100%;
+    margin: 0 0 12px 0;
     line-height: 1.6;
     text-align: left;
 }
@@ -114,15 +120,100 @@
 
 /* Bloque motivacional */
 .motivacion {
-    padding: 32px;
-    text-align: center;
     border-radius: 14px;
-    background: linear-gradient(135deg, #0d6efd 0%, #72efdd 100%);
+    background: linear-gradient(135deg, #7e8999 0%, #72efdd 100%);
     color: #052c65;
     font-weight: 700;
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    padding: 26px 24px;
 }
 
 .motivacion h2 {
     font-weight: 800;
+}
+
+.motivacion-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+}
+
+.motivacion-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 100%;
+    border: 2px solid rgb(255, 255, 255);
+    background: #fff;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+@media (max-width: 991.98px) {
+    .hero-section {
+        min-height: 200px;
+        background-position: center 38%;
+    }
+
+    .home-section {
+        padding: 28px 18px;
+    }
+
+    .bio-list {
+        gap: 10px 12px;
+    }
+
+    .bio-list li {
+        flex: 1 1 calc(50% - 12px);
+        max-width: calc(50% - 12px);
+    }
+
+    .stat-box {
+        padding: 18px;
+    }
+
+    .motivacion-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 18px;
+    }
+
+    .motivacion-img {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 6px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-section {
+        min-height: 170px;
+    }
+
+    .home-section {
+        padding: 22px 14px;
+    }
+
+    .bio-list li {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .bio-section p,
+    .bio-text,
+    .bio-footer p {
+        text-align: left;
+    }
+
+    .motivacion {
+        text-align: center;
+    }
+
+    .motivacion-img {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 8px;
+    }
 }

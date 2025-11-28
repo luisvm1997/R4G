@@ -4,7 +4,12 @@
     ViewData["Title"] = "Carreras";
 }
 
-<h1 class="mb-4">🏁 Carreras</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/carreras.css" asp-append-version="true" />
+}
+
+<div class="container">
+<h1 class="page-title">Carreras</h1>
 
 <a class="btn btn-success mb-4" asp-action="Create">
     ➕ Añadir Carrera
@@ -56,4 +61,5 @@
         </div>
     </div>
 }
+</div>
 </div>

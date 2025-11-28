@@ -38,7 +38,10 @@ namespace R4G.App.Controllers
             return View(ToDto(carrera));
         }
 
-        public IActionResult Create() => View(new CarreraDto());
+        public IActionResult Create() => View(new CarreraDto
+        {
+            Fecha = DateTime.Today
+        });
 
         [HttpPost]
         [ValidateAntiForgeryToken]

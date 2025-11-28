@@ -289,6 +289,7 @@
 /Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll
 /Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll
 /Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.SqlServer.dll
 /Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll
@@ -515,6 +516,3 @@
 /Users/luisvillanuevamorales/Desktop/R4G/obj/Debug/net8.0/R4G.App.pdb
 /Users/luisvillanuevamorales/Desktop/R4G/obj/Debug/net8.0/R4G.App.genruntimeconfig.cache
 /Users/luisvillanuevamorales/Desktop/R4G/obj/Debug/net8.0/ref/R4G.App.dll
-/Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll
-/Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/R4G.Tests/obj/project.assets.json
-/Users/luisvillanuevamorales/Desktop/R4G/bin/Debug/net8.0/R4G.Tests/obj/R4G.Tests.csproj.nuget.dgspec.json

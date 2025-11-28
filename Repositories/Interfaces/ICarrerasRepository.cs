@@ -6,6 +6,7 @@ namespace R4G.App.Repositories.Interfaces
     {
         Task<List<Carrera>> GetAllByUserAsync(string userId);
         Task<Carrera?> GetByIdAsync(int id, string userId);
+        Task<Carrera?> GetByNameAndDateAsync(string userId, string nombre, DateTime fecha);
         Task AddAsync(Carrera carrera);
         Task UpdateAsync(Carrera carrera);
         Task DeleteAsync(Carrera carrera);

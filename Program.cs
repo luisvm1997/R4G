@@ -23,7 +23,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireDigit = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
 })
+.AddErrorDescriber<R4G.App.Identity.SpanishIdentityErrorDescriber>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<ICarrerasRepository, CarrerasRepository>();

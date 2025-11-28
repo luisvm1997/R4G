@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using R4G.App.Models;
 
@@ -113,10 +114,21 @@ namespace R4G.App.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                var email = Input.Email?.Trim();
+                var normalizedEmail = _userManager.NormalizeEmail(email);
+
+                // Si el email ya existe, devolvemos un mensaje claro antes de intentar crear
+                var exists = await _userManager.Users.AnyAsync(u => u.NormalizedEmail == normalizedEmail);
+                if (exists)
+                {
+                    ModelState.AddModelError(string.Empty, $"Ya existe una cuenta con el email '{email}'. Si olvidaste la contraseña, recupérala.");
+                    return Page();
+                }
+
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, email, CancellationToken.None);
+                await _emailStore.SetEmailAsync(user, email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

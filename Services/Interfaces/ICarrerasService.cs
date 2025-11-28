@@ -9,5 +9,6 @@ namespace R4G.App.Services.Interfaces
         Task<bool> CreateAsync(Carrera carrera, string userId);
         Task<bool> UpdateAsync(Carrera carrera, string userId);
         Task<bool> DeleteAsync(int id, string userId);
+        Task<bool> DeleteByNameAndDateAsync(string userId, string nombre, DateTime fecha);
     }
 }

@@ -36,3 +36,53 @@
     border-radius: 12px;
     margin-bottom: 10px;
 }
+
+/* Carrusel */
+.carreras-slider {
+    position: relative;
+    overflow: hidden;
+    padding: 12px 32px;
+}
+
+.carreras-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.4s ease;
+    will-change: transform;
+}
+
+.carrera-slide {
+    flex: 0 0 100%;
+}
+
+@media (min-width: 768px) {
+    .carrera-slide {
+        flex: 0 0 50%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .carrera-slide {
+        flex: 0 0 33.3333%;
+    }
+}
+
+.carreras-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #e1e5ef;
+    color: #0b2447;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    z-index: 2;
+}
+
+.carreras-arrow.prev { left: 6px; }
+.carreras-arrow.next { right: 6px; }

@@ -1,0 +1,49 @@
+.mejores-marcas .stat-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    border: 1px solid #eef0f6;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mejores-marcas .stat-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.mejores-marcas .stat-box h2 {
+    font-weight: 800;
+}
+
+.mejores-marcas .form-control {
+    text-align: center;
+}
+
+.mejores-marcas .stat-box .small {
+    letter-spacing: 0.08em;
+}
+
+.mejores-marcas .marca-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mejores-marcas .dist-box {
+    padding: 10px 12px;
+    border: 1px solid #eef0f6;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    background: #f7f9fc;
+}
+
+.mejores-marcas .time-box {
+    padding: 12px 14px;
+    border: 1px solid #e1e5ef;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    background: #fff;
+}

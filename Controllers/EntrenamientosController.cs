@@ -37,7 +37,10 @@ namespace R4G.App.Controllers
             return View(ToDto(entreno));
         }
 
-        public IActionResult Create() => View(new EntrenamientoDto());
+        public IActionResult Create() => View(new EntrenamientoDto
+        {
+            Fecha = DateTime.Today
+        });
 
         [HttpPost]
         [ValidateAntiForgeryToken]

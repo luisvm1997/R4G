@@ -1,35 +1,35 @@
 @model R4G.App.ViewModels.CarreraDto
 
-<div class="card p-4 shadow-sm">
+<div class="container my-4">
+    <div class="card p-4 shadow-sm">
 
-    <h2>@Model.Nombre</h2>
+        <p><strong>Fecha:</strong> @Model.Fecha.ToString("dd/MM/yyyy")</p>
+        <p><strong>Ciudad:</strong> @Model.Ciudad</p>
 
-    <p><strong>Fecha:</strong> @Model.Fecha.ToString("dd/MM/yyyy")</p>
-    <p><strong>Ciudad:</strong> @Model.Ciudad</p>
+        <p><strong>Distancia:</strong> @Model.DistanciaKm km</p>
 
-    <p><strong>Distancia:</strong> @Model.DistanciaKm km</p>
+        <hr />
 
-    <hr />
+        <h4>Tiempo oficial</h4>
+        <p><strong>Tiempo total:</strong> @Model.DuracionFormateada</p>
 
-    <h4>Tiempo oficial</h4>
-    <p><strong>Tiempo total:</strong> @Model.DuracionFormateada</p>
+        <hr />
 
-    <hr />
+        <h4>Estadísticas</h4>
+        <p><strong>Ritmo medio:</strong> @Model.RitmoMedio</p>
+        <p><strong>Velocidad media:</strong> @Model.VelocidadMedia.ToString("0.00") km/h</p>
 
-    <h4>Estadísticas</h4>
-    <p><strong>Ritmo medio:</strong> @Model.RitmoMedio</p>
-    <p><strong>Velocidad media:</strong> @Model.VelocidadMedia.ToString("0.00") km/h</p>
+        <hr />
 
-    <hr />
+        @if (!string.IsNullOrWhiteSpace(Model.Comentarios))
+        {
+            <p><strong>Comentarios:</strong> @Model.Comentarios</p>
+        }
 
-    @if (!string.IsNullOrWhiteSpace(Model.Comentarios))
-    {
-        <p><strong>Comentarios:</strong> @Model.Comentarios</p>
-    }
+        <div class="mt-4">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        </div>
 
-    <div class="mt-4">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
-        <a asp-action="Index" class="btn btn-secondary">Volver</a>
     </div>
-
 </div>

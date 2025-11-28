@@ -1,0 +1,79 @@
+/* =====================================
+   LANDING (Welcome)
+===================================== */
+
+.landing-container {
+    height: 100vh;
+    width: 100%;
+    background: url('/img/runforglorybanner.png') center 10%/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.landing-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 40px;
+}
+
+.landing-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-top: 120px;
+    width: 82%;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+@media (max-width: 991.98px) {
+    .landing-container {
+        background-position: center 30%;
+        padding: 0 16px;
+    }
+
+    .landing-content {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .landing-actions {
+        justify-content: center;
+        width: 100%;
+        margin-top: 80px;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .landing-container {
+        min-height: 100vh;
+        padding: 12px 12px 18px;
+        background-image: url('/img/r4gparamovil2.png');
+        background-position:center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-color: #000;
+    }
+
+    .landing-actions {
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 110px;
+    }
+
+    .landing-actions .btn {
+        width: 100%;
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        border-radius: 9px;
+    }
+
+    .landing-actions .btn {
+        width: 100%;
+    }
+}

@@ -30,6 +30,15 @@
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
 
+            <div class="password-rules mb-3">
+                <h6 class="mb-2">Requisitos de la contraseña</h6>
+                <ul class="password-rules-list">
+                    <li class="rule" data-rule="length">Mínimo 8 caracteres</li>
+                    <li class="rule" data-rule="digit">Al menos un número</li>
+                    <li class="rule" data-rule="upper">Al menos una mayúscula</li>
+                </ul>
+            </div>
+
             <div class="form-floating mb-3">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label asp-for="Input.ConfirmPassword">Confirmar contraseña</label>
@@ -66,4 +75,28 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        (() => {
+            const pwd = document.getElementById('Input_Password');
+            if (!pwd) return;
+
+            const rules = {
+                length: { el: document.querySelector('[data-rule="length"]'), test: v => v.length >= 8 },
+                digit: { el: document.querySelector('[data-rule="digit"]'), test: v => /\d/.test(v) },
+                upper: { el: document.querySelector('[data-rule="upper"]'), test: v => /[A-Z]/.test(v) }
+            };
+
+            const refresh = () => {
+                const value = pwd.value || '';
+                Object.values(rules).forEach(rule => {
+                    if (!rule.el) return;
+                    const ok = rule.test(value);
+                    rule.el.classList.toggle('ok', ok);
+                });
+            };
+
+            pwd.addEventListener('input', refresh);
+            refresh();
+        })();
+    </script>
 }

@@ -8,22 +8,26 @@
     <link rel="stylesheet" href="~/css/proximasCarreras.css" asp-append-version="true" />
 }
 
-<h1 class="text-center mb-4 fw-bold">
-    🏃‍♂️ Próximas Carreras Confirmadas
-</h1>
+<h1 class="page-title text-center">Próximas Carreras Confirmadas</h1>
 
 <div class="container">
 
     <!-- ============================
          ZARAGOZA / ARAGÓN
          ============================ -->
-    <h2 class="fw-bold mt-4 mb-3">🏙️ Zaragoza / Aragón</h2>
+    <h2 class="fw-bold mt-4 mb-3">Zaragoza / Aragón</h2>
 
-    <div class="row">
+    <div class="carreras-slider" id="sliderAragon">
+        <button type="button" class="carreras-arrow prev" aria-label="Carrera anterior">‹</button>
+        <div class="carreras-track">
         @foreach (var c in Model.CarrerasAragon.OrderBy(x => x.Fecha))
         {
-            <div class="col-md-4 mb-4">
-                <div class="card carrera-card shadow-sm border-0">
+            <div class="carrera-slide">
+                <div class="card shadow-sm border-0 h-100 carrera-card">
+                    @{
+                        var key = $"{c.Nombre}|{c.Fecha:yyyy-MM-dd}";
+                        bool isApuntada = (ViewBag.CarrerasApuntadas as HashSet<string>)?.Contains(key) ?? false;
+                    }
 
                     <img src="@c.ImagenUrl" class="card-img-top carrera-img" alt="@c.Nombre" />
 
@@ -32,24 +36,22 @@
                         <h5 class="card-title fw-bold mb-2">@c.Nombre</h5>
 
                         <p class="text-muted mb-1">
-                            <i class="fa-solid fa-calendar-days"></i>
                             @c.Fecha.ToString("dd/MM/yyyy")
                         </p>
 
                         <p class="text-muted mb-1">
-                            <i class="fa-solid fa-location-dot"></i>
                             @c.Ciudad (@c.Comunidad)
                         </p>
 
                         @if (!string.IsNullOrEmpty(c.Hora))
                         {
                             <p class="text-muted mb-1">
-                                <i class="fa-solid fa-clock"></i> @c.Hora
+                            @c.Hora
                             </p>
                         }
 
                         <span class="badge distancia-badge">
-                            <i class="fa-solid fa-road"></i> @c.DistanciaKm km
+                            @c.DistanciaKm km
                         </span>
 
                         <p class="card-text mt-3 descripcion">@c.Descripcion</p>
@@ -59,10 +61,39 @@
                             Más información
                         </a>
 
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            if (!isApuntada)
+                            {
+                                <form asp-action="CrearDesdeProxima" method="post" class="mt-2">
+                                    <input type="hidden" name="Nombre" value="@c.Nombre" />
+                                    <input type="hidden" name="Fecha" value="@c.Fecha.ToString("yyyy-MM-dd")" />
+                                    <input type="hidden" name="Ciudad" value="@c.Ciudad" />
+                                    <input type="hidden" name="Comunidad" value="@c.Comunidad" />
+                                    <input type="hidden" name="DistanciaKm" value="@c.DistanciaKm" />
+                                    <button type="submit" class="btn btn-outline-success w-100 fw-bold">
+                                        Me apunto
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-action="Desapuntarme" method="post" class="mt-2">
+                                    <input type="hidden" name="nombre" value="@c.Nombre" />
+                                    <input type="hidden" name="fecha" value="@c.Fecha.ToString("yyyy-MM-dd")" />
+                                    <button type="submit" class="btn btn-outline-danger w-100 fw-bold">
+                                        Cancelar
+                                    </button>
+                                </form>
+                            }
+                        }
+
                     </div>
                 </div>
             </div>
         }
+        </div>
+        <button type="button" class="carreras-arrow next" aria-label="Siguiente carrera">›</button>
     </div>
 
     <!-- ============================
@@ -76,20 +107,44 @@
             @foreach (var c in Model.CarrerasEspana.OrderBy(x => x.Fecha))
             {
                 <li class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-start">
+                    @{
+                        var key = $"{c.Nombre}|{c.Fecha:yyyy-MM-dd}";
+                        bool isApuntada = (ViewBag.CarrerasApuntadas as HashSet<string>)?.Contains(key) ?? false;
+                    }
                     
                     <div>
                         <strong>@c.Nombre</strong><br />
                         <span class="text-muted">
-                            📅 @c.Fecha.ToString("dd/MM/yyyy") · 
-                            📍 @c.Ciudad (@c.Comunidad) · 
-                            📏 @c.DistanciaKm km
+                            @c.Fecha.ToString("dd/MM/yyyy") · 
+                            @c.Ciudad (@c.Comunidad) · 
+                            @c.DistanciaKm km
                         </span>
                     </div>
 
                     <div class="mt-2 mt-md-0">
-                        <a href="@c.Enlace" target="_blank" class="btn btn-outline-primary btn-sm">
-                            Ver más
-                        </a>
+                        <a href="@c.Enlace" target="_blank" class="btn btn-outline-primary btn-sm me-2">Ver más</a>
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            if (!isApuntada)
+                            {
+                                <form asp-action="CrearDesdeProxima" method="post" class="d-inline">
+                                    <input type="hidden" name="Nombre" value="@c.Nombre" />
+                                    <input type="hidden" name="Fecha" value="@c.Fecha.ToString("yyyy-MM-dd")" />
+                                    <input type="hidden" name="Ciudad" value="@c.Ciudad" />
+                                    <input type="hidden" name="Comunidad" value="@c.Comunidad" />
+                                    <input type="hidden" name="DistanciaKm" value="@c.DistanciaKm" />
+                                    <button type="submit" class="btn btn-outline-success btn-sm">Me apunto</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-action="Desapuntarme" method="post" class="d-inline">
+                                    <input type="hidden" name="nombre" value="@c.Nombre" />
+                                    <input type="hidden" name="fecha" value="@c.Fecha.ToString("yyyy-MM-dd")" />
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Cancelar</button>
+                                </form>
+                            }
+                        }
                     </div>
 
                 </li>
@@ -98,3 +153,70 @@
     </div>
 
 </div>
+
+@section Scripts {
+    <script>
+        (() => {
+            const slider = document.getElementById('sliderAragon');
+            if (!slider) return;
+
+            const track = slider.querySelector('.carreras-track');
+            const slides = [...slider.querySelectorAll('.carrera-slide')];
+            const prev = slider.querySelector('.carreras-arrow.prev');
+            const next = slider.querySelector('.carreras-arrow.next');
+            if (!track || slides.length === 0) return;
+
+            let index = 0;
+            let autoplayId;
+
+            const gap = (() => {
+                const style = getComputedStyle(track);
+                const g = parseFloat(style.columnGap || style.gap || '0');
+                return isNaN(g) ? 0 : g;
+            })();
+
+            const slideWidth = () => slides[0].getBoundingClientRect().width + gap;
+            const visibleSlides = () => Math.max(1, Math.round((slider.clientWidth + gap) / slideWidth()));
+
+            const update = () => {
+                track.style.transform = `translateX(${-(slideWidth() * index)}px)`;
+            };
+
+            const maxIndex = () => Math.max(0, slides.length - visibleSlides());
+
+            const goTo = (i) => {
+                const max = maxIndex();
+                if (i > max) index = 0;
+                else if (i < 0) index = max;
+                else index = i;
+                update();
+            };
+
+            const startAutoplay = () => {
+                stopAutoplay();
+                autoplayId = setInterval(() => goTo(index + 1), 4500);
+            };
+
+            const stopAutoplay = () => {
+                if (autoplayId) clearInterval(autoplayId);
+            };
+
+            prev?.addEventListener('click', () => {
+                goTo(index - 1);
+                startAutoplay();
+            });
+            next?.addEventListener('click', () => {
+                goTo(index + 1);
+                startAutoplay();
+            });
+
+            slider.addEventListener('mouseenter', stopAutoplay);
+            slider.addEventListener('mouseleave', startAutoplay);
+
+            update();
+            startAutoplay();
+
+            window.addEventListener('resize', update);
+        })();
+    </script>
+}

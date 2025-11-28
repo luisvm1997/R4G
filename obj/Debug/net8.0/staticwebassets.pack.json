@@ -93,8 +93,20 @@
       "PackagePath": "staticwebassets/img/media-maraton-zgz.png"
     },
     {
+      "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/img/pitu-removebg-preview.png",
+      "PackagePath": "staticwebassets/img/pitu-removebg-preview.png"
+    },
+    {
       "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/img/r4g2.png",
       "PackagePath": "staticwebassets/img/r4g2.png"
+    },
+    {
+      "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/img/r4gparamovil2.png",
+      "PackagePath": "staticwebassets/img/r4gparamovil2.png"
+    },
+    {
+      "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/img/rfgparamovil.png",
+      "PackagePath": "staticwebassets/img/rfgparamovil.png"
     },
     {
       "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/img/runforglorybanner.png",
@@ -339,6 +351,18 @@
     {
       "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/uploads/e41f60be-438f-49a3-8dac-57a7855e4f3b_2ac7e6ba1730443e97867ba6744eead4.jpeg",
+      "PackagePath": "staticwebassets/uploads/e41f60be-438f-49a3-8dac-57a7855e4f3b_2ac7e6ba1730443e97867ba6744eead4.jpeg"
+    },
+    {
+      "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/uploads/e41f60be-438f-49a3-8dac-57a7855e4f3b_95b5c16d6f514e2babaa7f59e9d8c672.jpeg",
+      "PackagePath": "staticwebassets/uploads/e41f60be-438f-49a3-8dac-57a7855e4f3b_95b5c16d6f514e2babaa7f59e9d8c672.jpeg"
+    },
+    {
+      "Id": "/Users/luisvillanuevamorales/Desktop/R4G/wwwroot/uploads/e41f60be-438f-49a3-8dac-57a7855e4f3b_e4656589abbe47e9ba4ae34e4b90fd64.jpeg",
+      "PackagePath": "staticwebassets/uploads/e41f60be-438f-49a3-8dac-57a7855e4f3b_e4656589abbe47e9ba4ae34e4b90fd64.jpeg"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.R4G.App.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -16,6 +16,9 @@ namespace R4G.App.Controllers
         }
 
         private string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        private bool IsGalleryAdmin() =>
+            User.Identity?.IsAuthenticated == true &&
+            string.Equals(User.Identity.Name, "luisvm1997@gmail.com", StringComparison.OrdinalIgnoreCase);
 
         [HttpGet]
         public IActionResult Index()
@@ -24,8 +27,10 @@ namespace R4G.App.Controllers
             if (!Directory.Exists(uploadPath))
                 Directory.CreateDirectory(uploadPath);
 
+            ViewBag.CanManage = IsGalleryAdmin();
             var files = Directory.GetFiles(uploadPath)
                 .Select(Path.GetFileName)
+                .Where(f => f != null)
                 .OrderByDescending(f => f)
                 .ToList();
 
@@ -36,6 +41,8 @@ namespace R4G.App.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Subir(IFormFile archivo)
         {
+            if (!IsGalleryAdmin()) return Forbid();
+
             if (archivo == null || archivo.Length == 0)
             {
                 TempData["GaleriaMsg"] = "Selecciona un archivo.";
@@ -53,7 +60,7 @@ namespace R4G.App.Controllers
             if (!Directory.Exists(uploadsDir))
                 Directory.CreateDirectory(uploadsDir);
 
-            var safeName = $"{GetUserId()}_{Guid.NewGuid():N}{ext}";
+            var safeName = $"{Guid.NewGuid():N}{ext}";
             var filePath = Path.Combine(uploadsDir, safeName);
 
             using (var stream = System.IO.File.Create(filePath))
@@ -62,6 +69,36 @@ namespace R4G.App.Controllers
             }
 
             TempData["GaleriaMsg"] = "Imagen subida.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Eliminar(string archivo)
+        {
+            if (!IsGalleryAdmin()) return Forbid();
+
+            if (string.IsNullOrWhiteSpace(archivo))
+            {
+                TempData["GaleriaMsg"] = "Archivo no válido.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var fileName = Path.GetFileName(archivo);
+
+            var uploadsDir = Path.Combine(_env.WebRootPath, "uploads");
+            var filePath = Path.Combine(uploadsDir, fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+                TempData["GaleriaMsg"] = "Archivo eliminado.";
+            }
+            else
+            {
+                TempData["GaleriaMsg"] = "El archivo no existe.";
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }
