@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("R4G.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48264b171bb6dc05342cb7ec0bff83c15e31fc4c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53a6d40b11916866e0f2057bf8dfe4ca0e6c026a")]
 [assembly: System.Reflection.AssemblyProductAttribute("R4G.App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("R4G.App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
