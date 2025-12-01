@@ -1,6 +1,4 @@
-/* =====================================
-   LANDING (Welcome)
-===================================== */
+/* Estilos de la landing (Welcome). */
 
 .landing-container {
     height: 100vh;
@@ -27,9 +25,7 @@
     width: 82%;
 }
 
-/* =====================================
-   RESPONSIVE
-===================================== */
+/* Responsive */
 @media (max-width: 991.98px) {
     .landing-container {
         background-position: center 30%;

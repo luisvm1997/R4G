@@ -31,15 +31,15 @@ namespace R4G.App.Models
 
         public string? Comentarios { get; set; }
 
-        // ⭐ Duración total
+        // Duración total del entrenamiento.
         public TimeSpan Duracion =>
             new TimeSpan(DuracionHoras, DuracionMinutos, DuracionSegundos);
 
-        // ⭐ Minutos totales
+        // Duración expresada en minutos (útil para cálculos).
         public double MinutosTotales =>
             Duracion.TotalMinutes;
 
-        // ⭐ Ritmo medio
+        // Ritmo medio formateado min/km.
         public string RitmoMedio
         {
             get
@@ -55,7 +55,7 @@ namespace R4G.App.Models
             }
         }
 
-        // ⭐ Velocidad media
+        // Velocidad media en km/h.
         public double VelocidadMedia
         {
             get

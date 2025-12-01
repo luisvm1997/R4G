@@ -19,11 +19,11 @@ namespace R4G.App.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            // ⭐ SI NO ESTÁ LOGUEADO → ENSEÑA LA LANDING "WELCOME"
+            // Si no hay sesión, muestra la landing "Welcome".
             if (!(User?.Identity?.IsAuthenticated ?? false))
                 return View("Welcome");
 
-            // ⭐ SI ESTÁ LOGUEADO → CARGA EL HOME REAL
+            // Si está logueado, construye y carga el home real.
             var vm = await _homeService.BuildHomeViewModel(GetUserId());
             return View(vm);
         }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace R4G.App.ViewModels
 {
-    // DTO para desacoplar las vistas de la entidad de EF.
+    // DTO para no exponer la entidad de EF en las vistas.
     public record EntrenamientoDto
     {
         public int Id { get; init; }

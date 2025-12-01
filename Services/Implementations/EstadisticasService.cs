@@ -97,7 +97,7 @@ namespace R4G.App.Services
 
         private static string FormatearDuracion(TimeSpan duracion)
         {
-            // Si hay horas, mostramos h:mm:ss; si no, solo mm:ss
+            // Con horas: h:mm:ss; sin horas: mm:ss.
             if (duracion.TotalHours >= 1)
                 return duracion.ToString(@"h\:mm\:ss");
 

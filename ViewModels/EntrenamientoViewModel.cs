@@ -3,8 +3,7 @@ using R4G.App.Models;
 
 namespace R4G.App.ViewModels
 {
-    // ViewModel pensado para pantallas que necesiten un entrenamiento concreto
-    // junto con el historial completo del usuario.
+    // Para pantallas que muestran un entrenamiento concreto y el historial del usuario.
     public record EntrenamientoViewModel
     {
         public Entrenamiento Entrenamiento { get; init; } = new();

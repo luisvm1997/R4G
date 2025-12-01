@@ -1,6 +1,4 @@
-/* =====================================
-   AUTH (Login/Register)
-===================================== */
+/* Estilos para Login/Register. */
 
 .auth-viewport {
     min-height: 100vh;
@@ -75,9 +73,7 @@
     background: #198754;
 }
 
-/* =====================================
-   AUTH (Logged out)
-===================================== */
+/* Estilos para la pantalla Logged out. */
 .loggedout-overlay {
     min-height: 100vh;
     display: flex;

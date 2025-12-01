@@ -1,16 +1,14 @@
-/* =====================================
-   HOME
-===================================== */
+/* Estilos de la página principal (home). */
 
-/* Hero sección home */
+/* Hero de la home */
 .hero-section {
-    /* usa ruta relativa para evitar problemas con paths base */
+    /* Ruta relativa para evitar problemas con paths base */
     background:  url('../img/RFG_BANNER.png') center 51.5%/cover no-repeat;
     min-height: 255px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Bloques home */
+/* Bloques destacados de la home */
 .home-section {
     padding: 36px 28px;
     margin-bottom: 24px;
@@ -70,7 +68,7 @@
     font-weight: 700;
 }
 
-/* Bio */
+/* Bloque bio */
 .bio-section {
     width: 100%;
 }
@@ -148,9 +146,7 @@
     background: #fff;
 }
 
-/* =====================================
-   RESPONSIVE
-===================================== */
+/* Responsive */
 @media (max-width: 991.98px) {
     .hero-section {
         min-height: 200px;
