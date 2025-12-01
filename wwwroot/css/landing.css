@@ -1,14 +1,23 @@
 /* Estilos de la landing (Welcome). */
 
 .landing-container {
-    height: 100vh;
+    height: clamp(520px, 75vh, 900px);
     width: 100%;
-    background: url('/img/runforglorybanner.png') center 10%/cover no-repeat;
+    background: url('/img/runforglorybanner.png') center/cover no-repeat;
+    background-color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
+}
+
+/* Evita que el banner se recorte en pantallas muy anchas. */
+@media (min-width: 1400px) {
+    .landing-container {
+        background-size: contain;
+        background-position: top center;
+    }
 }
 
 .landing-content {
