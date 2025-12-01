@@ -2,13 +2,16 @@
 
 /* Hero de la home */
 .hero-section {
-    /* Ruta relativa para evitar problemas con paths base */
+    /* Ruta para evitar problemas con paths base (Ajustar el banner....) */
     background:  url('../img/RFG_BANNER.png') center 51.5%/cover no-repeat;
-    min-height: 255px;
+    width: 100%;
+    max-width: 1280px;
+    height: clamp(170px, 30vw, 255px);
+    margin: 0 auto;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Bloques destacados de la home */
+/* Bloques de la home */
 .home-section {
     padding: 36px 28px;
     margin-bottom: 24px;
@@ -148,11 +151,6 @@
 
 /* Responsive */
 @media (max-width: 991.98px) {
-    .hero-section {
-        min-height: 200px;
-        background-position: center 38%;
-    }
-
     .home-section {
         padding: 28px 18px;
     }
@@ -184,10 +182,6 @@
 }
 
 @media (max-width: 575.98px) {
-    .hero-section {
-        min-height: 170px;
-    }
-
     .home-section {
         padding: 22px 14px;
     }
