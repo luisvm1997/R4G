@@ -18,6 +18,7 @@ namespace R4G.App.Repositories
         {
             return await _context.Carreras
                 .Where(c => c.UsuarioId == userId)
+                .OrderByDescending(c => c.Fecha)
                 .ToListAsync();
         }
 

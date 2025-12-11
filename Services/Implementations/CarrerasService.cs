@@ -34,10 +34,22 @@ namespace R4G.App.Services
 
         public async Task<bool> UpdateAsync(Carrera carrera, string userId)
         {
-            if (carrera.UsuarioId != userId)
-                return false;
+            // Only update races owned by the current user.
+            var existing = await _repo.GetByIdAsync(carrera.Id, userId);
+            if (existing == null) return false;
 
-            await _repo.UpdateAsync(carrera);
+            existing.Nombre = carrera.Nombre;
+            existing.Fecha = carrera.Fecha;
+            existing.DistanciaKm = carrera.DistanciaKm;
+            existing.TiempoHoras = carrera.TiempoHoras;
+            existing.TiempoMinutos = carrera.TiempoMinutos;
+            existing.TiempoSegundos = carrera.TiempoSegundos;
+            existing.Ciudad = carrera.Ciudad;
+            existing.PosicionGeneral = carrera.PosicionGeneral;
+            existing.PosicionCategoria = carrera.PosicionCategoria;
+            existing.Comentarios = carrera.Comentarios;
+
+            await _repo.UpdateAsync(existing);
             await _repo.SaveChangesAsync();
             return true;
         }

@@ -8,25 +8,32 @@ namespace R4G.App.ViewModels
     {
         public int Id { get; init; }
 
-        [Required]
+        [Display(Name = "Fecha")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public DateTime Fecha { get; init; }
 
-        [Range(0.1, 1000)]
+        [Display(Name = "Distancia (km)")]
+        [Range(0.1, 1000, ErrorMessage = "La distancia debe estar entre {1} y {2} km.")]
         public double DistanciaKm { get; init; }
 
-        [Range(0, 48)]
+        [Display(Name = "Horas")]
+        [Range(0, 48, ErrorMessage = "Las horas deben estar entre {1} y {2}.")]
         public int DuracionHoras { get; init; }
 
-        [Range(0, 59)]
+        [Display(Name = "Minutos")]
+        [Range(0, 59, ErrorMessage = "Los minutos deben estar entre {1} y {2}.")]
         public int DuracionMinutos { get; init; }
 
-        [Range(0, 59)]
+        [Display(Name = "Segundos")]
+        [Range(0, 59, ErrorMessage = "Los segundos deben estar entre {1} y {2}.")]
         public int DuracionSegundos { get; init; }
 
-        [Required]
-        [StringLength(100)]
+        [Display(Name = "Tipo")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [StringLength(100, ErrorMessage = "El campo {0} no puede superar los {1} caracteres.")]
         public string Tipo { get; init; } = string.Empty;
 
+        [Display(Name = "Comentarios")]
         public string? Comentarios { get; init; }
 
         public string DuracionFormateada =>

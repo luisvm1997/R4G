@@ -49,6 +49,11 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
+.r4g-navbar .container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .navbar-logo {
     height: 80px;
 

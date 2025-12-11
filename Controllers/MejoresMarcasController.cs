@@ -48,14 +48,15 @@ namespace R4G.App.Controllers
 
         private static string MejorTiempo(IEnumerable<(double Distancia, TimeSpan Duracion)> items, double objetivoKm)
         {
+            // Permite cierto margen para distancias medidas con GPS o pistas no exactas.
             double margen = objetivoKm switch
             {
-                1 => 0.10,
-                5 => 0.25,
-                10 => 0.30,
-                21.097 => 0.40,
-                42.195 => 0.70,
-                _ => 0.30
+                1 => 0.15,       // 1K → ±150 m
+                5 => 0.50,       // 5K → ±500 m
+                10 => 0.70,      // 10K → ±700 m (cubre 9.6 km)
+                21.097 => 1.5,   // Media → ±1.5 km
+                42.195 => 2.5,   // Maratón → ±2.5 km
+                _ => Math.Max(0.05 * objetivoKm, 0.3)
             };
 
             var mejor = items
