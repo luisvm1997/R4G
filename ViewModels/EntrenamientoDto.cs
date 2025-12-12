@@ -18,15 +18,15 @@ namespace R4G.App.ViewModels
 
         [Display(Name = "Horas")]
         [Range(0, 48, ErrorMessage = "Las horas deben estar entre {1} y {2}.")]
-        public int DuracionHoras { get; init; }
+        public int? DuracionHoras { get; init; }
 
         [Display(Name = "Minutos")]
         [Range(0, 59, ErrorMessage = "Los minutos deben estar entre {1} y {2}.")]
-        public int DuracionMinutos { get; init; }
+        public int? DuracionMinutos { get; init; }
 
         [Display(Name = "Segundos")]
         [Range(0, 59, ErrorMessage = "Los segundos deben estar entre {1} y {2}.")]
-        public int DuracionSegundos { get; init; }
+        public int? DuracionSegundos { get; init; }
 
         [Display(Name = "Tipo")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
@@ -36,14 +36,17 @@ namespace R4G.App.ViewModels
         [Display(Name = "Comentarios")]
         public string? Comentarios { get; init; }
 
+        // Formato legible con sufijos (hh mm ss).
         public string DuracionFormateada =>
-            $"{DuracionHoras:D2}h {DuracionMinutos:D2}m {DuracionSegundos:D2}s";
+            $"{DuracionHoras.GetValueOrDefault():D2}h {DuracionMinutos.GetValueOrDefault():D2}m {DuracionSegundos.GetValueOrDefault():D2}s";
 
         public string RitmoMedio
         {
             get
             {
-                var minutosTotales = DuracionHoras * 60 + DuracionMinutos + DuracionSegundos / 60.0;
+                var minutosTotales = DuracionHoras.GetValueOrDefault() * 60
+                                   + DuracionMinutos.GetValueOrDefault()
+                                   + DuracionSegundos.GetValueOrDefault() / 60.0;
                 if (DistanciaKm <= 0 || minutosTotales <= 0) return "-";
 
                 double minPorKm = minutosTotales / DistanciaKm;
@@ -58,7 +61,9 @@ namespace R4G.App.ViewModels
         {
             get
             {
-                var minutosTotales = DuracionHoras * 60 + DuracionMinutos + DuracionSegundos / 60.0;
+                var minutosTotales = DuracionHoras.GetValueOrDefault() * 60
+                                   + DuracionMinutos.GetValueOrDefault()
+                                   + DuracionSegundos.GetValueOrDefault() / 60.0;
                 if (minutosTotales <= 0) return 0;
                 return DistanciaKm / (minutosTotales / 60.0);
             }

@@ -45,8 +45,9 @@ namespace R4G.App.ViewModels
         [Display(Name = "Comentarios")]
         public string? Comentarios { get; init; }
 
+        // Mismo formato que entrenamientos (hh mm ss).
         public string DuracionFormateada =>
-            $"{TiempoHoras:D2}:{TiempoMinutos:D2}:{TiempoSegundos:D2}";
+            $"{TiempoHoras:D2}h {TiempoMinutos:D2}m {TiempoSegundos:D2}s";
 
         public string RitmoMedio
         {

@@ -59,15 +59,19 @@ namespace R4G.App.Controllers
                 _ => Math.Max(0.05 * objetivoKm, 0.3)
             };
 
-            var mejor = items
+            var exactos = items
+                .Where(x => x.Distancia > 0 && x.Duracion > TimeSpan.Zero)
                 .Where(x => Math.Abs(x.Distancia - objetivoKm) <= margen)
                 .OrderBy(x => x.Duracion)
-                .FirstOrDefault();
+                .ToList();
 
-            if (mejor.Duracion == TimeSpan.Zero)
-                return "-";
+            if (!exactos.Any())
+                return "-"; // Sin intentos reales para esa distancia.
 
-            return mejor.Duracion.ToString(@"hh\:mm\:ss");
+            return Formatear(exactos.First().Duracion);
         }
+
+        // Formato consistente hh:mm:ss (mantiene 00:MM:SS si no hay horas).
+        private static string Formatear(TimeSpan t) => t.ToString(@"hh\:mm\:ss");
     }
 }

@@ -104,9 +104,9 @@ namespace R4G.App.Controllers
             Id = dto.Id,
             Fecha = dto.Fecha,
             DistanciaKm = dto.DistanciaKm,
-            DuracionHoras = dto.DuracionHoras,
-            DuracionMinutos = dto.DuracionMinutos,
-            DuracionSegundos = dto.DuracionSegundos,
+            DuracionHoras = dto.DuracionHoras ?? 0,
+            DuracionMinutos = dto.DuracionMinutos ?? 0,
+            DuracionSegundos = dto.DuracionSegundos ?? 0,
             Tipo = dto.Tipo,
             Comentarios = dto.Comentarios
         };
