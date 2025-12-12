@@ -34,7 +34,7 @@ namespace R4G.App.Services
 
         public async Task<bool> UpdateAsync(Carrera carrera, string userId)
         {
-            // Only update races owned by the current user.
+            // Solo actualiza carreras propiedad del usuario actual.
             var existing = await _repo.GetByIdAsync(carrera.Id, userId);
             if (existing == null) return false;
 

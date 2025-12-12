@@ -1,5 +1,5 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+// Con licencia para la .NET Foundation bajo uno o más acuerdos.
+// La .NET Foundation te concede licencia para este archivo bajo la licencia MIT.
 #nullable disable
 
 using Microsoft.AspNetCore.Identity;
@@ -11,28 +11,28 @@ using R4G.App.Models;
 namespace R4G.App.Areas.Identity.Pages.Account.Manage
 {
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-    ///     directly from your code. This API may change or be removed in future releases.
+    ///     Esta API admite la infraestructura predeterminada de UI de ASP.NET Core Identity y no está pensada para usarse
+    ///     directamente desde tu código. Esta API puede cambiar o eliminarse en versiones futuras.
     /// </summary>
     public class ShowRecoveryCodesModel : PageModel
     {
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        ///     Esta API admite la infraestructura predeterminada de UI de ASP.NET Core Identity y no está pensada para usarse
+        ///     directamente desde tu código. Esta API puede cambiar o eliminarse en versiones futuras.
         /// </summary>
         [TempData]
         public string[] RecoveryCodes { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        ///     Esta API admite la infraestructura predeterminada de UI de ASP.NET Core Identity y no está pensada para usarse
+        ///     directamente desde tu código. Esta API puede cambiar o eliminarse en versiones futuras.
         /// </summary>
         [TempData]
         public string StatusMessage { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
+        ///     Esta API admite la infraestructura predeterminada de UI de ASP.NET Core Identity y no está pensada para usarse
+        ///     directamente desde tu código. Esta API puede cambiar o eliminarse en versiones futuras.
         /// </summary>
         public IActionResult OnGet()
         {
